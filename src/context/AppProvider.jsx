@@ -8,18 +8,26 @@ const AppProvider = ({ children }) => {
     const [registerModalIsOpen, setRegisterModalIsOpen] = useState(false)
     // recoverPassword
     const [recoverPasswordModalIsOpen, setRecoverPasswordModalIsOpen] = useState(false)
+    const [EmailForRecoverPassword, setEmailForRecoverPassword] = useState("")
+    const [changePasswordModalIsOpen, setChangePasswordModalIsOpen] = useState(false)
 
 
-    const handleRegisterModal = () => {
+
+    const handleRegisterModal = () =>
         setRegisterModalIsOpen(!registerModalIsOpen)
-    }
-    
-    const handleRecoverPasswordModal = () => {
+
+    const handleRecoverPasswordModal = () =>
         setRecoverPasswordModalIsOpen(!recoverPasswordModalIsOpen)
-    }
+
+    const handleSetEmailForRecoverPassword = (email) =>
+        setEmailForRecoverPassword(email)
+
+    const handleChangePasswordModalIsOpen = () =>
+        setChangePasswordModalIsOpen(!changePasswordModalIsOpen)
+
 
     return (
-        <appContext.Provider value={{ handleRegisterModal, registerModalIsOpen, handleRecoverPasswordModal, recoverPasswordModalIsOpen }}>
+        <appContext.Provider value={{ handleRegisterModal, registerModalIsOpen, handleRecoverPasswordModal, handleChangePasswordModalIsOpen, recoverPasswordModalIsOpen, EmailForRecoverPassword, handleSetEmailForRecoverPassword, changePasswordModalIsOpen }}>
             {children}
         </appContext.Provider>
     )

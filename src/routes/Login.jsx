@@ -4,13 +4,15 @@ import logoImage from "../assets/logo.png"
 import ButtonRecoverPasswordModal from "../components/buttons/Login/ButtonRecoverPasswordModal";
 import ButtonRegisterModal from "../components/buttons/Login/ButtonRegisterModal";
 import LoginForm from "../components/forms/Login/LoginForm";
+import ChangePasswordModal from "../components/modals/Login/ChangePasswordModal";
+import RecoverPasswordModal from "../components/modals/Login/RecoverPasswordModal";
 import RegisterModal from "../components/modals/Login/RegisterModal";
 import { appContext } from "../context/AppProvider";
 
 
 const Login = () => {
 
-    const { handleRegisterModal, registerModalIsOpen, handleRecoverPasswordModal, recoverPasswordModalIsOpen } = useContext(appContext);
+    const { handleRegisterModal, registerModalIsOpen, handleRecoverPasswordModal, changePasswordModalIsOpen, recoverPasswordModalIsOpen } = useContext(appContext);
 
     return (
         <div className="h-screen w-screen bg-[#f0f2f5] relative">
@@ -22,7 +24,7 @@ const Login = () => {
                             <p className="text-center lg:text-left text-slate-700 text-2xl 2xl:text-4xl border-green-800 mb-10 md:pr-20">Te ayuda a comunicarte y estar más cerca de las personas que hacen grande tu empresa.</p>
                         </div>
                     </div>
-                  
+
 
                     <div className="lg:col-span-2 md:w-[70%] lg:w-full md:mx-auto bg-[#f0f2f5]">
                         <div className="p-10 bg-white shadow-lg rounded-lg ">
@@ -38,12 +40,15 @@ const Login = () => {
                                 <ButtonRegisterModal onClick={handleRegisterModal} />
                             </div>
                         </div>
-                    </div>                                                                                                                           
+                    </div>
                 </div>
             </div>
 
-            {/* modal Register*/}
+            {/* Modals */}
             {registerModalIsOpen && <RegisterModal />}
+            {recoverPasswordModalIsOpen && <RecoverPasswordModal />}
+            {changePasswordModalIsOpen && <ChangePasswordModal />}
+
 
         </div>
 
