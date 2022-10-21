@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom"
 import logo from "../../assets/logo.png"
 
 
@@ -36,28 +37,28 @@ const Header = () => {
                             </button>
                             <div
                                 id="myDropdown"
-                                className="dropdownlist absolute bg-gray-800 text-slate-800 right-0 mt-3 p-3 overflow-auto z-30 w-[150px] invisible"
+                                className="dropdownlist absolute bg-white text-slate-800 right-0 mt-3 p-3 overflow-auto z-30 w-[150px] invisible "
                             >
 
-                                <a
-                                    href="#"
-                                    className="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"
+                                <NavLink
+                                    to="/cuenta"
+                                    className="p-2  text-slate-800 text-sm no-underline hover:no-underline block"
                                 >
-                                    <i className="fa fa-user fa-fw" /> Mi cuenta
-                                </a>
-                                <a
-                                    href="#"
-                                    className="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"
+                                     Mi cuenta
+                                </NavLink>
+                                <NavLink
+                                    to="/configuracion"
+                                    className="p-2  text-slate-800 text-sm no-underline hover:no-underline block"
                                 >
-                                    <i className="fa fa-cog fa-fw" /> Configuración
-                                </a>
+                                     Configuración
+                                </NavLink>
                                 <div className="border border-gray-800" />
-                                <a
-                                    href="#"
-                                    className="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"
+                                <button
+                                    to="#"
+                                    className="p-2  text-slate-800 text-sm no-underline hover:no-underline block"
                                 >
-                                    <i className="fas fa-sign-out-alt fa-fw" /> Salir
-                                </a>
+                                     Salir
+                                </button>
                             </div>
                         </div>
                     </li>

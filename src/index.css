@@ -8,4 +8,13 @@
     html {
         font-family: 'Signika Negative', sans-serif;
     }
-  }
+
+
+
+}
+
+@layer utilities {
+    .activ {
+        @apply text-red-800;
+    }
+}
