@@ -1,7 +1,13 @@
+import { useContext } from 'react';
 import { FiCopy } from 'react-icons/fi';
 import Layout from '../components/layout/Layout'
+import CopyLinkFormModal from '../components/modals/Mensajeria/CopyLinkFormModal';
+import { appContext } from '../context/AppProvider';
+
 
 const Mensajeria = () => {
+
+    const { CopyLinkFormModalIsOpen, handleCopyLinkFormModal } = useContext(appContext);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -17,12 +23,11 @@ const Mensajeria = () => {
                                     <div className='grid grid-cols-2 gap-5 mb-2'>
                                         <div >
                                             <select name="cars" id="cars" className='w-full p-2 rounded-sm text-sm'>
-                                            <option value="0">Sin rango de edad</option>
+                                                <option value="0">Sin rango de edad</option>
                                                 <option value="18">18 - 30</option>
                                                 <option value="31">31 - 40</option>
                                                 <option value="41">41 - 50</option>
-                                                <option value="51">51 - 60</option>
-                                                <option value="61">61 +</option>
+                                                <option value="51">51 +</option>
                                             </select>
                                         </div>
                                         <div>
@@ -75,7 +80,7 @@ const Mensajeria = () => {
                             {/* segunda  */}
 
                             <div className='bg-[#334155] md:w-[500px] mx-auto  px-5 py-10 '>
-                                <form>
+                                <form onSubmit={handleSubmit}>
 
                                     <div className='mb-2'>
                                         <input type="email" placeholder='Ingresa el correo electronico' className='p-2 rounded-sm text-sm w-full' />
@@ -93,6 +98,7 @@ const Mensajeria = () => {
                                             Adjuntar archivo
                                         </button>
                                         <button
+                                            onClick={handleCopyLinkFormModal}
                                             className='bg-[#EC4899] rounded-lg py-2 text-sm text-white font-bold'
                                         >
                                             Enlace formulario
@@ -112,6 +118,11 @@ const Mensajeria = () => {
 
 
                     </div>
+
+                    {/* modal */}
+                    {CopyLinkFormModalIsOpen && <CopyLinkFormModal />}
+
+
                 </section>
             </Layout>
         </>

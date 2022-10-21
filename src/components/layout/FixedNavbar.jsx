@@ -12,7 +12,7 @@ const FixedNavbar = () => {
                                 to="/"
                                 className="block pb-1 py-1 md:py-3 pl-1 align-middle text-white lg:text-slate-800 no-underline hover:text-[#2BB4BE] border-b-2 lg:border-none font-bold  w-full ml-3 text-xs md:text-sm"
                             >
-                                DASHBOARD
+                                INICIO
 
                             </NavLink>
 
@@ -31,7 +31,7 @@ const FixedNavbar = () => {
                                 to="/formularios"
                                 className="block pb-1 py-1 md:py-3 pl-1 align-middle text-white lg:text-slate-800 no-underline hover:text-[#2BB4BE] border-b-2 lg:border-none font-bold  w-full ml-3 active text-xs md:text-sm"
                             >
-                                FORMULARIOS
+                                FORMULARIO
 
                             </NavLink>
                         </li>
@@ -40,11 +40,11 @@ const FixedNavbar = () => {
                                 to="/basedatos"
                                 className="block pb-1 py-1 md:py-3 pl-1 align-middle text-white lg:text-slate-800 no-underline hover:text-[#2BB4BE] border-b-2 lg:border-none font-bold  w-full ml-3 active text-xs md:text-sm"
                             >
-                                BASEDATOS
+                                DATABASE
 
                             </NavLink>
                         </li>
-                        <li className="mr-3 flex-1">
+                        {/* <li className="mr-3 flex-1">
                             <NavLink
                                 to="/cuenta"
                                 className="block pb-1 py-1 md:py-3 pl-1 align-middle text-white lg:text-slate-800 no-underline hover:text-[#2BB4BE] border-b-2 lg:border-none font-bold  w-full ml-3 active text-xs md:text-sm"
@@ -61,7 +61,7 @@ const FixedNavbar = () => {
                                 CONFIGURACIÓN
 
                             </NavLink>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
             </div>

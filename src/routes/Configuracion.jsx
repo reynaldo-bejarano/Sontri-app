@@ -1,7 +1,12 @@
-import { FiCopy } from 'react-icons/fi';
+import { useContext } from 'react';
 import Layout from '../components/layout/Layout'
+import AddInteres from '../components/modals/Interes/AddInteres';
+import { appContext } from '../context/AppProvider';
 
 const Configuracion = () => {
+    const { handleAddInteresModalOpen, AddInteresModalOpenIsOpen } = useContext(appContext);
+
+    
     return (
         <>
             <Layout>
@@ -12,11 +17,11 @@ const Configuracion = () => {
                                 <div >
                                     <div className='flex gap-5 mb-5'>
                                         <button
+                                            onClick={handleAddInteresModalOpen}
                                             className='dark:bg-green-700 rounded-lg py-2 px-10 text-sm text-white font-bold'
                                         >
                                             Agregar
                                         </button>
-
                                     </div>
                                     <div className='mb-5'>
                                         <input type="email" placeholder='Buscar' className='p-2 rounded-sm text-sm w-full' />
@@ -29,12 +34,8 @@ const Configuracion = () => {
                                         <div className='grid gap-1 mb-5 md:mb-0'>
                                             <p className="dark:text-white text-sm font-bold capitalize">Legos</p>
                                         </div>
-                                        <div className="flex items-center gap-2  ">
-                                            <button
-                                                className='dark:bg-[#F97316]  rounded-lg py-1 px-10 text-sm dark:text-slate-800 font-bold'
-                                            >
-                                                Actualizar
-                                            </button>
+                                        <div>
+
                                             <button
                                                 className='dark:bg-red-700  rounded-lg py-1 px-10 text-sm dark:text-white font-bold'
                                             >
@@ -48,12 +49,8 @@ const Configuracion = () => {
                                         <div className='grid gap-1 mb-5 md:mb-0'>
                                             <p className="dark:text-white text-sm font-bold capitalize">Legos</p>
                                         </div>
-                                        <div className="flex items-center gap-2  ">
-                                            <button
-                                                className='dark:bg-[#F97316] rounded-lg py-1 px-10 text-sm dark:text-slate-800 font-bold'
-                                            >
-                                                Actualizar
-                                            </button>
+                                        <div className="">
+
                                             <button
                                                 className='dark:bg-red-700  rounded-lg py-1 px-10 text-sm dark:text-white font-bold'
                                             >
@@ -67,12 +64,8 @@ const Configuracion = () => {
                                         <div className='grid gap-1 mb-5 md:mb-0'>
                                             <p className="dark:text-white text-sm font-bold capitalize">Legos</p>
                                         </div>
-                                        <div className="flex items-center gap-2  ">
-                                            <button
-                                                className='dark:bg-[#F97316]  rounded-lg py-1 px-10 text-sm dark:text-slate-800 font-bold'
-                                            >
-                                                Actualizar
-                                            </button>
+                                        <div className="">
+
                                             <button
                                                 className='dark:bg-red-700  rounded-lg py-1 px-10 text-sm dark:text-white font-bold'
                                             >
@@ -80,19 +73,13 @@ const Configuracion = () => {
                                             </button>
                                         </div>
                                     </div>
-
-
-
-
-
-
-
                                 </div>
 
                             </div>
                         </div>
-
                     </div>
+                    {AddInteresModalOpenIsOpen && <AddInteres />}
+
                 </section>
             </Layout>
         </>

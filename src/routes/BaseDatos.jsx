@@ -1,8 +1,16 @@
 import Layout from '../components/layout/Layout'
 import { FiCopy } from 'react-icons/fi';
+import AddClientModal from '../components/modals/BaseDatos/AddClientModal';
+import { useContext } from 'react';
+import { appContext } from '../context/AppProvider';
+import UpdateClientModal from '../components/modals/BaseDatos/UpdateClientModal';
+import DetailsClientModal from '../components/modals/BaseDatos/DetailsClientModal';
 
 
 const BaseDatos = () => {
+
+    const { AddClientModalOpenIsOpen, handleAddClientModalOpen, UpdateClientModalOpenIsOpen, handleUpdateClientModalOpen, handleDetailsClientModalOpen, DetailsClientModalOpenIsOpen } = useContext(appContext);
+
     return (
         <>
             <Layout>
@@ -13,6 +21,7 @@ const BaseDatos = () => {
                                 <div >
                                     <div className='flex gap-5 mb-5'>
                                         <button
+                                            onClick={handleAddClientModalOpen}
                                             className='dark:bg-green-700 rounded-lg py-2 px-10 text-sm text-white font-bold'
                                         >
                                             Agregar
@@ -38,11 +47,13 @@ const BaseDatos = () => {
                                         </div>
                                         <div className="grid gap-2  ">
                                             <button
+                                                onClick={handleUpdateClientModalOpen}
                                                 className='dark:bg-[#F97316]  rounded-lg py-1 px-10 text-sm dark:text-slate-800 font-bold'
                                             >
                                                 Actualizar
                                             </button>
                                             <button
+                                                onClick={handleDetailsClientModalOpen}
                                                 className='dark:bg-[#e9ff78]  rounded-lg py-1 px-10 text-sm dark:text-slate-800 font-bold'
                                             >
                                                 Detalles
@@ -63,11 +74,13 @@ const BaseDatos = () => {
                                         </div>
                                         <div className="grid gap-2  ">
                                             <button
+                                                onClick={handleUpdateClientModalOpen}
                                                 className='dark:bg-[#F97316]  rounded-lg py-1 px-10 text-sm dark:text-slate-800 font-bold'
                                             >
                                                 Actualizar
                                             </button>
                                             <button
+                                                onClick={handleDetailsClientModalOpen}
                                                 className='dark:bg-[#e9ff78]  rounded-lg py-1 px-10 text-sm dark:text-slate-800 font-bold'
                                             >
                                                 Detalles
@@ -87,11 +100,13 @@ const BaseDatos = () => {
                                         </div>
                                         <div className="grid gap-2  ">
                                             <button
+                                                onClick={handleUpdateClientModalOpen}
                                                 className='dark:bg-[#F97316]  rounded-lg py-1 px-10 text-sm dark:text-slate-800 font-bold'
                                             >
                                                 Actualizar
                                             </button>
                                             <button
+                                                onClick={handleDetailsClientModalOpen}
                                                 className='dark:bg-[#e9ff78]  rounded-lg py-1 px-10 text-sm dark:text-slate-800 font-bold'
                                             >
                                                 Detalles
@@ -107,8 +122,14 @@ const BaseDatos = () => {
 
                             </div>
                         </div>
-
                     </div>
+
+                    {AddClientModalOpenIsOpen && <AddClientModal />}
+                    {UpdateClientModalOpenIsOpen && <UpdateClientModal />}
+                    {DetailsClientModalOpenIsOpen && <DetailsClientModal />}
+
+
+
                 </section>
             </Layout>
         </>

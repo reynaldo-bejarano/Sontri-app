@@ -1,7 +1,14 @@
-import { Link } from "react-router-dom"
+import { useContext } from "react"
 import Layout from "../components/layout/Layout"
+import AddFormModal from "../components/modals/Formulario/AddFormModal"
+import DetailsFormModal from "../components/modals/Formulario/DetailsFormModal"
+import { appContext } from "../context/AppProvider"
+
 
 const Formularios = () => {
+
+    const { handleAddFormModalOpen, AddFormModalIsOpen, DetailsFormModalIsOpen, handleDetailsFormModalOpen } = useContext(appContext);
+
     return (
         <>
             <Layout>
@@ -12,6 +19,7 @@ const Formularios = () => {
                                 <div >
                                     <div className='flex gap-5 mb-5'>
                                         <button
+                                            onClick={handleAddFormModalOpen}
                                             className='dark:bg-green-700 rounded-lg py-2 px-10 text-sm text-white font-bold'
                                         >
                                             Agregar
@@ -22,8 +30,7 @@ const Formularios = () => {
                                                 <option value="18">18 - 30</option>
                                                 <option value="31">31 - 40</option>
                                                 <option value="41">41 - 50</option>
-                                                <option value="51">51 - 60</option>
-                                                <option value="61">61 +</option>
+                                                <option value="51">51 +</option>
                                             </select>
                                         </div>
                                         <div>
@@ -45,11 +52,12 @@ const Formularios = () => {
                                     <div className="dark:bg-[#334155] p-5 rounded-lg mb-4">
                                         <h2 className="dark:text-white mb-3 font-bold">Formulario de navidad - Juguetes legos</h2>
                                         <div className="grid gap-2 md:flex md:gap-5 ">
-                                            <a href="#" className='dark:bg-[#F97316] text-center rounded-lg py-1 px-10 text-sm dark:text-white font-bold'
+                                            <a href="#" target="_blanck" className='dark:bg-[#F97316] text-center rounded-lg py-1 px-10 text-sm dark:text-white font-bold'
                                             >Formulario</a>
-                                            <a href="#" className='dark:bg-[#EC4899] text-center  rounded-lg py-1 px-10 text-sm dark:text-white font-bold'
+                                            <a href="#" target="_blanck" className='dark:bg-[#EC4899] text-center  rounded-lg py-1 px-10 text-sm dark:text-white font-bold'
                                             >Resultados</a>
                                             <button
+                                                onClick={handleDetailsFormModalOpen}
                                                 className='dark:bg-[#e9ff78]  rounded-lg py-1 px-10 text-sm dark:text-slate-800 font-bold'
                                             >
                                                 Detalles
@@ -57,45 +65,20 @@ const Formularios = () => {
                                         </div>
                                     </div>
 
-                                        {/* ciclo map */}
-                                        <div className="dark:bg-[#334155] p-5 rounded-lg mb-4">
-                                        <h2 className="dark:text-white mb-3 font-bold">Formulario de navidad - Juguetes legos</h2>
-                                        <div className="grid gap-2 md:flex md:gap-5 ">
-                                            <a href="#" className='dark:bg-[#F97316] text-center rounded-lg py-1 px-10 text-sm dark:text-white font-bold'
-                                            >Formulario</a>
-                                            <a href="#" className='dark:bg-[#EC4899] text-center  rounded-lg py-1 px-10 text-sm dark:text-white font-bold'
-                                            >Resultados</a>
-                                            <button
-                                                className='dark:bg-[#e9ff78]  rounded-lg py-1 px-10 text-sm dark:text-slate-800 font-bold'
-                                            >
-                                                Detalles
-                                            </button>
-                                        </div>
-                                    </div>
 
-                                        {/* ciclo map */}
-                                        <div className="dark:bg-[#334155] p-5 rounded-lg mb-4">
-                                        <h2 className="dark:text-white mb-3 font-bold">Formulario de navidad - Juguetes legos</h2>
-                                        <div className="grid gap-2 md:flex md:gap-5 ">
-                                            <a href="#" className='dark:bg-[#F97316] text-center rounded-lg py-1 px-10 text-sm dark:text-white font-bold'
-                                            >Formulario</a>
-                                            <a href="#" className='dark:bg-[#EC4899] text-center  rounded-lg py-1 px-10 text-sm dark:text-white font-bold'
-                                            >Resultados</a>
-                                            <button
-                                                className='dark:bg-[#e9ff78]  rounded-lg py-1 px-10 text-sm dark:text-slate-800 font-bold'
-                                            >
-                                                Detalles
-                                            </button>
-                                        </div>
-                                    </div>
-                                  
-                                   
+
+
 
                                 </div>
 
                             </div>
                         </div>
                     </div>
+
+                    {AddFormModalIsOpen && <AddFormModal />}
+                    {DetailsFormModalIsOpen && <DetailsFormModal />}
+
+
                 </section>
             </Layout>
         </>

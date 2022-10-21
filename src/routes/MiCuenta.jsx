@@ -42,6 +42,8 @@ const MiCuenta = () => {
                         </div>
 
                     </div>
+
+                  
                 </section>
             </Layout>
         </>
