@@ -12,15 +12,15 @@ const Formularios = () => {
     return (
         <>
             <Layout>
-                <section className="dark:bg-[#F0F2F5] w-full relative">
-                    <div className="dark:bg-slate-800 w-full md:h-96 lg:h-64 py-14">
+                <section className="dark:bg-[#F0F2F5] bg-[#F0F2F5] w-full relative">
+                    <div className="dark:bg-slate-800 bg-slate-800 w-full md:h-96 lg:h-64 py-14">
                         <div className="w-full">
                             <div className="lg:px-16 px-2">
                                 <div >
                                     <div className='flex gap-5 mb-5'>
                                         <button
                                             onClick={handleAddFormModalOpen}
-                                            className='dark:bg-green-700 rounded-lg py-2 px-10 text-sm text-white font-bold'
+                                            className='dark:bg-green-700 bg-green-700 rounded-lg py-2 px-10 text-sm text-white dark:text-white font-bold'
                                         >
                                             Agregar
                                         </button>
@@ -49,16 +49,16 @@ const Formularios = () => {
 
                                 <div>
                                     {/* ciclo map */}
-                                    <div className="dark:bg-[#334155] p-5 rounded-lg mb-4">
-                                        <h2 className="dark:text-white mb-3 font-bold">Formulario de navidad - Juguetes legos</h2>
+                                    <div className="dark:bg-[#334155] bg-[#334155] p-5 rounded-lg mb-4">
+                                        <h2 className="dark:text-white text-white mb-3 font-bold">Formulario de navidad - Juguetes legos</h2>
                                         <div className="grid gap-2 md:flex md:gap-5 ">
-                                            <a href="#" target="_blanck" className='dark:bg-[#F97316] text-center rounded-lg py-1 px-10 text-sm dark:text-white font-bold'
+                                            <a href="#" target="_blanck" className='dark:bg-[#F97316] bg-[#F97316] text-center rounded-lg py-1 px-10 text-sm dark:text-white font-bold text-white'
                                             >Formulario</a>
-                                            <a href="#" target="_blanck" className='dark:bg-[#EC4899] text-center  rounded-lg py-1 px-10 text-sm dark:text-white font-bold'
+                                            <a href="#" target="_blanck" className='dark:bg-[#EC4899] text-center bg-[#EC4899] rounded-lg py-1 px-10 text-sm dark:text-white font-bold text-white'
                                             >Resultados</a>
                                             <button
                                                 onClick={handleDetailsFormModalOpen}
-                                                className='dark:bg-[#e9ff78]  rounded-lg py-1 px-10 text-sm dark:text-slate-800 font-bold'
+                                                className='dark:bg-[#e9ff78] bg-[#e9ff78] rounded-lg py-1 px-10 text-sm dark:text-slate-800 text-slate-800 font-bold'
                                             >
                                                 Detalles
                                             </button>
