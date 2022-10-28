@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import { FirebaseSignInUserWithEmailAndPassword } from '../../../firebase/firebase';
 import firebaseErrors from '../../../firebase/firebaseErrors';
 
@@ -8,20 +7,19 @@ const LoginForm = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [error, setError] = useState();
-    const navigate = useNavigate()
+
 
 
     const onSubmit = async (data) => {
         const { email, password } = data;
         try {
             await FirebaseSignInUserWithEmailAndPassword(email, password);
-            navigate("/");
         } catch (error) {
             console.log(error.code)
             setError(firebaseErrors(error.code));
         }
-
     }
+    
     return (
         <form onSubmit={handleSubmit(onSubmit)} >
             <div className='mb-3'>
