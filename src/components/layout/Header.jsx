@@ -2,10 +2,21 @@ import { useContext } from "react"
 import { NavLink } from "react-router-dom"
 import logo from "../../assets/logo.png"
 import { appContext } from "../../context/AppProvider"
+import { authContext } from "../../context/AuthProvider"
+import { FirebaseSignOut } from "../../firebase/firebase"
 
 
 const Header = () => {
     const { userModalIsOpen, handleUserModalOpen } = useContext(appContext);
+    const { userAuthState } = useContext(authContext)
+
+    const handleFirebaseSignOut = () => {
+        try {
+            FirebaseSignOut();
+        } catch (error) {
+            console.error(error);
+        }
+    }
     return (
         <header>
             <nav
@@ -30,7 +41,7 @@ const Header = () => {
                                         onClick={handleUserModalOpen}
                                         className="drop-button text-white dark:text-white py-2 px-2 flex items-center gap-2"
                                     >
-                                        Empresa
+                                        {userAuthState.displayName}
                                         <svg
                                             className="h-3 fill-current inline"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +70,7 @@ const Header = () => {
                                         </NavLink>
                                         <div className="border dark:border-white border-white" />
                                         <button
-                                            to="#"
+                                            onClick={handleFirebaseSignOut}
                                             className="p-2  dark:text-white text-white text-sm no-underline hover:no-underline block"
                                         >
                                             Salir

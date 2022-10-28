@@ -24,7 +24,7 @@ const DetailsClientModal = () => {
                         <p className="col-span-2 p-2 rounded-lg bg-white dark:bg-white text-gray-600 dark:text-gray-600">+5062222000</p>
                     </div>
 
-                    <p className=" p-2 rounded-lg bg-white dark:bg-white flex justify-between items-center"
+                    <p className=" p-2 rounded-lg text-gray-600 dark:text-gray-600 bg-white dark:bg-white flex justify-between items-center"
                     >nicole.retana@uhispano.ac.cr <button><FiCopy /></button>
                     </p>
 

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 const FixedNavbar = () => {
     return (
         <nav aria-label="alternative nav ">
-            <div className="dark:bg-slate-800 dark:lg:bg-white  h-20 fixed bottom-0 mt-12 md:relative md:h-screen z-10 w-full md:w-[225px] 2xl:w-80 content-center ">
+            <div className="dark:bg-slate-800 dark:lg:bg-white  h-20 fixed bottom-0 mt-12 md:relative md:h-screen z-10 w-full md:w-[225px] 2xl:w-[264px] content-center ">
                 <div className="md:mt-12 md:w-[225px] md:fixed md:left-0 md:top-0 content-center md:content-start text-left justify-between">
                     <ul className="list-reset flex flex-row md:flex-col pt-3 md:py-3 px-1 md:px-2 text-center md:text-left overflow-auto bg-slate-800 lg:bg-white">
                         <li className="mr-3 flex-1">

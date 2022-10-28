@@ -16,12 +16,12 @@ const Login = () => {
 
     return (
         <div className="h-screen w-screen bg-[#f0f2f5] dark:bg-[#f0f2f5] relative">
-            <div className="container mx-auto lg:p-20 2xl:px-10 2xl:py-56">
+            <div className="container mx-auto lg:p-20 2xl:px-10 2xl:py-40">
                 <div className="grid lg:grid-cols-5 md:gap-20">
                     <div className="lg:col-span-3 bg-[#f0f2f5] dark:bg-[#f0f2f5]">
                         <div>
-                            <img src={logoImage} alt="logo" className="md:w-72 2xl:w-96 mx-auto lg:m-0 " />
-                            <p className="text-center lg:text-left text-slate-700 text-2xl 2xl:text-4xl border-green-800 dark:border-green-800 mb-10 md:pr-20">Te ayuda a comunicarte y estar más cerca de las personas que hacen grande tu empresa.</p>
+                            <img src={logoImage} alt="logo" className="md:w-72 2xl:w-60 mx-auto lg:m-0 " />
+                            <p className="text-center lg:text-left text-slate-700 text-2xl 2xl:text-2xl border-green-800 dark:border-green-800 mb-10 md:pr-20">Te ayuda a comunicarte y estar más cerca de las personas que hacen grande tu empresa.</p>
                         </div>
                     </div>
 
