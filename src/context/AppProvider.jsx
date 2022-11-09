@@ -4,6 +4,7 @@ export const appContext = createContext();
 
 const AppProvider = ({ children }) => {
 
+
     //User
     const [userModalIsOpen, setUserModalIsOpen] = useState(false)
     // register
@@ -15,12 +16,14 @@ const AppProvider = ({ children }) => {
     //Formulario
     const [AddFormModalIsOpen, setAddFormModalIsOpen] = useState(false);
     const [DetailsFormModalIsOpen, setDetailsFormModalIsOpen] = useState(false);
+    const [formDetailsId, setFormDetailsId] = useState();
     //Mensajeria
     const [CopyLinkFormModalIsOpen, setCopyLinkFormModalIsOpen] = useState(false);
     //BaseDatos
     const [AddClientModalOpenIsOpen, setAddClientModalOpenIsOpen] = useState(false);
     const [UpdateClientModalOpenIsOpen, setUpdateClientModalOpenIsOpen] = useState(false);
     const [DetailsClientModalOpenIsOpen, setDetailsClientModalOpenIsOpen] = useState(false);
+    const [clientDetailsId, setClientDetailsId] = useState();
     //Interes
     const [AddInteresModalOpenIsOpen, setAddInteresModalOpenIsOpen] = useState(false);
 
@@ -34,7 +37,8 @@ const AppProvider = ({ children }) => {
         setAddInteresModalOpenIsOpen(!AddInteresModalOpenIsOpen);
     }
     //BaseDatos
-    const handleDetailsClientModalOpen = () => {
+    const handleDetailsClientModalOpen = (id) => {
+        setClientDetailsId(id);
         setDetailsClientModalOpenIsOpen(!DetailsClientModalOpenIsOpen);
     }
 
@@ -53,7 +57,8 @@ const AppProvider = ({ children }) => {
     const handleAddFormModalOpen = () => {
         setAddFormModalIsOpen(!AddFormModalIsOpen);
     }
-    const handleDetailsFormModalOpen = () => {
+    const handleDetailsFormModalOpen = (id) => {
+        setFormDetailsId(id);
         setDetailsFormModalIsOpen(!DetailsFormModalIsOpen);
     }
     // register
@@ -71,7 +76,7 @@ const AppProvider = ({ children }) => {
 
 
     return (
-        <appContext.Provider value={{ handleRegisterModal, registerModalIsOpen, handleRecoverPasswordModal, handleChangePasswordModalIsOpen, recoverPasswordModalIsOpen, EmailForRecoverPassword, handleSetEmailForRecoverPassword, changePasswordModalIsOpen, AddFormModalIsOpen, handleAddFormModalOpen, DetailsFormModalIsOpen, handleDetailsFormModalOpen, CopyLinkFormModalIsOpen, handleCopyLinkFormModal, AddClientModalOpenIsOpen, handleAddClientModalOpen, UpdateClientModalOpenIsOpen, handleUpdateClientModalOpen, DetailsClientModalOpenIsOpen, handleDetailsClientModalOpen, AddInteresModalOpenIsOpen, handleAddInteresModalOpen, userModalIsOpen, handleUserModalOpen }}>
+        <appContext.Provider value={{ handleRegisterModal, registerModalIsOpen, handleRecoverPasswordModal, handleChangePasswordModalIsOpen, recoverPasswordModalIsOpen, EmailForRecoverPassword, handleSetEmailForRecoverPassword, changePasswordModalIsOpen, AddFormModalIsOpen, handleAddFormModalOpen, DetailsFormModalIsOpen, formDetailsId, handleDetailsFormModalOpen, CopyLinkFormModalIsOpen, handleCopyLinkFormModal, AddClientModalOpenIsOpen, handleAddClientModalOpen, UpdateClientModalOpenIsOpen, handleUpdateClientModalOpen, DetailsClientModalOpenIsOpen, handleDetailsClientModalOpen, AddInteresModalOpenIsOpen, handleAddInteresModalOpen, userModalIsOpen, handleUserModalOpen, clientDetailsId }}>
             {children}
         </appContext.Provider>
     )

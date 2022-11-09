@@ -1,7 +1,9 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+
+import { NavLink, useLocation } from 'react-router-dom'
 
 const FixedNavbar = () => {
+    const actualView = useLocation();
+
     return (
         <nav aria-label="alternative nav ">
             <div className="dark:bg-slate-800 dark:lg:bg-white  h-20 fixed bottom-0 mt-12 md:relative md:h-screen z-10 w-full md:w-[225px] 2xl:w-[264px] content-center ">
@@ -10,7 +12,10 @@ const FixedNavbar = () => {
                         <li className="mr-3 flex-1">
                             <NavLink
                                 to="/"
-                                className="block pb-1 py-1 md:py-3 pl-1 align-middle text-white lg:text-slate-800 no-underline hover:text-[#2BB4BE] border-b-2 lg:border-none font-bold  w-full ml-3 text-xs md:text-sm"
+                                className={actualView.pathname === "/"
+                                    ? "block pb-1 py-1 md:py-3 pl-1 align-middle text-[#2BB4BE] lg:text-[#2BB4BE] no-underline hover:text-[#2BB4BE] border-b-2 lg:border-none font-bold  w-full ml-3 active text-xs md:text-sm"
+                                    : "block pb-1 py-1 md:py-3 pl-1 align-middle text-slate-800 lg:text-slate-800 no-underline hover:text-[#2BB4BE] border-b-2 lg:border-none font-bold  w-full ml-3 active text-xs md:text-sm"
+                                }
                             >
                                 INICIO
 
@@ -20,7 +25,10 @@ const FixedNavbar = () => {
                         <li className="mr-3 flex-1">
                             <NavLink
                                 to="/mensajeria"
-                                className="block pb-1 py-1 md:py-3 pl-1 align-middle text-white lg:text-slate-800 no-underline hover:text-[#2BB4BE] border-b-2 lg:border-none font-bold  w-full ml-3 active text-xs md:text-sm"
+                                className={actualView.pathname === "/mensajeria"
+                                    ? "block pb-1 py-1 md:py-3 pl-1 align-middle text-[#2BB4BE] lg:text-[#2BB4BE] no-underline hover:text-[#2BB4BE] border-b-2 lg:border-none font-bold  w-full ml-3 active text-xs md:text-sm"
+                                    : "block pb-1 py-1 md:py-3 pl-1 align-middle text-slate-800 lg:text-slate-800 no-underline hover:text-[#2BB4BE] border-b-2 lg:border-none font-bold  w-full ml-3 active text-xs md:text-sm"
+                                }
                             >
                                 MENSAJERIA
 
@@ -29,7 +37,10 @@ const FixedNavbar = () => {
                         <li className="mr-3 flex-1">
                             <NavLink
                                 to="/formularios"
-                                className="block pb-1 py-1 md:py-3 pl-1 align-middle text-white lg:text-slate-800 no-underline hover:text-[#2BB4BE] border-b-2 lg:border-none font-bold  w-full ml-3 active text-xs md:text-sm"
+                                className={actualView.pathname === "/formularios"
+                                    ? "block pb-1 py-1 md:py-3 pl-1 align-middle text-[#2BB4BE] lg:text-[#2BB4BE] no-underline hover:text-[#2BB4BE] border-b-2 lg:border-none font-bold  w-full ml-3 active text-xs md:text-sm"
+                                    : "block pb-1 py-1 md:py-3 pl-1 align-middle text-slate-800 lg:text-slate-800 no-underline hover:text-[#2BB4BE] border-b-2 lg:border-none font-bold  w-full ml-3 active text-xs md:text-sm"
+                                }
                             >
                                 FORMULARIO
 
@@ -38,7 +49,10 @@ const FixedNavbar = () => {
                         <li className="mr-3 flex-1">
                             <NavLink
                                 to="/basedatos"
-                                className="block pb-1 py-1 md:py-3 pl-1 align-middle text-white lg:text-slate-800 no-underline hover:text-[#2BB4BE] border-b-2 lg:border-none font-bold  w-full ml-3 active text-xs md:text-sm"
+                                className={actualView.pathname === "/basedatos"
+                                    ? "block pb-1 py-1 md:py-3 pl-1 align-middle text-[#2BB4BE] lg:text-[#2BB4BE] no-underline hover:text-[#2BB4BE] border-b-2 lg:border-none font-bold  w-full ml-3 active text-xs md:text-sm"
+                                    : "block pb-1 py-1 md:py-3 pl-1 align-middle text-slate-800 lg:text-slate-800 no-underline hover:text-[#2BB4BE] border-b-2 lg:border-none font-bold  w-full ml-3 active text-xs md:text-sm"
+                                }
                             >
                                 DATABASE
 

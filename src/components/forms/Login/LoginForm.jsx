@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { FirebaseSignInUserWithEmailAndPassword } from '../../../firebase/firebase';
+import { authContext } from '../../../context/AuthProvider';
 import firebaseErrors from '../../../firebase/firebaseErrors';
 
 const LoginForm = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [error, setError] = useState();
+    const [error, setError, userAuthState] = useState();
+    const { FirebaseSignInUserWithEmailAndPassword } = useContext(authContext);
 
 
 
@@ -19,7 +21,7 @@ const LoginForm = () => {
             setError(firebaseErrors(error.code));
         }
     }
-    
+
     return (
         <form onSubmit={handleSubmit(onSubmit)} >
             <div className='mb-3'>

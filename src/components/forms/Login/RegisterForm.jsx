@@ -1,19 +1,19 @@
-import { FirebaseCreateUser } from "../../../firebase/firebase"
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { appContext } from "../../../context/AppProvider";
 import firebaseErrors from "../../../firebase/firebaseErrors";
+import { authContext } from "../../../context/AuthProvider";
 
 const RegisterForm = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { handleRegisterModal } = useContext(appContext);
+    const {FirebaseCreateUser} = useContext(authContext);
     const [error, setError] = useState();
 
     const onSubmit = async (data) => {
-        const { email, password, company } = data;
         try {
-            await FirebaseCreateUser(email, password, company);
+            await FirebaseCreateUser(data);
             handleRegisterModal();
         } catch (error) {
             setError(firebaseErrors(error.code));

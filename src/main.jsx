@@ -8,7 +8,7 @@ import './index.css'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+
     <AuthProvider>
       <AppProvider>
         <BrowserRouter>
@@ -17,5 +17,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </AppProvider>
     </AuthProvider>
 
-  </React.StrictMode>
+ 
 )

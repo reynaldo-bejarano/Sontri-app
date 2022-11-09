@@ -1,14 +1,14 @@
 import { useContext } from "react"
-import { NavLink } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 import logo from "../../assets/logo.png"
 import { appContext } from "../../context/AppProvider"
 import { authContext } from "../../context/AuthProvider"
-import { FirebaseSignOut } from "../../firebase/firebase"
 
 
 const Header = () => {
     const { userModalIsOpen, handleUserModalOpen } = useContext(appContext);
-    const { userAuthState } = useContext(authContext)
+    const { userAuthState, FirebaseSignOut } = useContext(authContext);
+    const actualView = useLocation();
 
     const handleFirebaseSignOut = () => {
         try {
@@ -31,7 +31,9 @@ const Header = () => {
                         </NavLink>
                     </div>
                     <div className="hidden md:flex flex-1 md:w-full justify-left md:justify-start  px-2 lg:col-span-2">
-                        <h1 className="text-white dark:text-white font-bold uppercase pl-5">Dashboard</h1>
+                        <h1 className="text-white dark:text-white font-bold uppercase pl-5">
+                            {actualView.pathname === "/" ? "inicio" : actualView.pathname.slice(1)}
+                        </h1>
                     </div>
                     <div className="flex content-center justify-between md:w-1/3 lg:w-full md:justify-end lg:col-span-8">
                         <ul className="list-reset flex justify-between flex-1 md:flex-none items-center">
@@ -41,7 +43,7 @@ const Header = () => {
                                         onClick={handleUserModalOpen}
                                         className="drop-button text-white dark:text-white py-2 px-2 flex items-center gap-2"
                                     >
-                                        {userAuthState.displayName}
+                                        {userAuthState}
                                         <svg
                                             className="h-3 fill-current inline"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -56,16 +58,27 @@ const Header = () => {
 
                                     >
 
+
                                         <NavLink
                                             to="/cuenta"
-                                            className="p-2  dark:text-white text-white text-sm no-underline hover:no-underline block"
+                                            onClick={handleUserModalOpen}
+                                            className={actualView.pathname === "/cuenta"
+                                                ? "p-2  dark:text-yellow-400 text-yellow-400 text-sm no-underline hover:no-underline block"
+                                                : "p-2  dark:text-white text-white text-sm no-underline hover:no-underline block"
+                                            }
+
                                         >
                                             Mi cuenta
                                         </NavLink>
+
+
                                         <NavLink
                                             to="/configuracion"
-                                            className="p-2  dark:text-white text-white text-sm no-underline hover:no-underline block"
-                                        >
+                                            onClick={handleUserModalOpen}
+                                            className={actualView.pathname === "/configuracion"
+                                                ? "p-2  dark:text-yellow-400 text-yellow-400 text-sm no-underline hover:no-underline block"
+                                                : "p-2  dark:text-white text-white text-sm no-underline hover:no-underline block"
+                                            }                                        >
                                             Configuración
                                         </NavLink>
                                         <div className="border dark:border-white border-white" />

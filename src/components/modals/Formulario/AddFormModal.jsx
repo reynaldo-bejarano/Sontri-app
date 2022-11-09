@@ -1,10 +1,35 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { appContext } from '../../../context/AppProvider';
+import { authContext } from '../../../context/AuthProvider';
 
 const AddFormModal = () => {
 
     const { handleAddFormModalOpen } = useContext(appContext);
+    const { FirebaseGetInterests, FirebaseCreateForm, interestData } = useContext(authContext);
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    useEffect(() => {
+        try {
+            FirebaseGetInterests();
+        } catch (error) {
+            console.log(error.message)
+        }
+
+    }, [])
+
+    const onSubmit = (data) => {
+        try {
+            console.log(data)
+            FirebaseCreateForm(data)
+            handleAddFormModalOpen();
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
 
     return (
         <div className="w-full lg:w-[700px] rounded-lg 2xl:w-[700px] md:mx-auto 
@@ -16,17 +41,31 @@ const AddFormModal = () => {
                         <AiFillCloseCircle className="text-3xl 2xl:text-4xl text-white dark:text-white" />
                     </button>
                 </div>
-                <form className="grid gap-2">
+                <form className="grid gap-2" onSubmit={handleSubmit(onSubmit)}>
                     <div className="grid grid-cols-5 gap-5">
-                        <input type="text" placeholder="Nombre del formulario" className="col-span-3 p-2 rounded-lg" />
+                        <input
+                            type="text"
+                            placeholder="Nombre del formulario"
+                            className="col-span-3 p-2 rounded-lg"
+                            {...register("name", {
+                                required: {
+                                    value: true,
+                                    message: "El nombre es requerido"
+                                }
+                            })}
+                        />
 
+                        <select
+                            className='col-span-2 w-full p-2 rounded-lg text-sm'
+                            {...register("interest", {
+                                required: {
+                                    value: true,
+                                }
+                            })}
+                        >
 
-                        <select name="cars" id="cars"
-                            className='col-span-2 w-full p-2 rounded-lg text-sm'>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
+                            {interestData.map(item => <option key={item.PK_TSON_T_InterestDocument} value={item.TSON_T_Interest}>{item.TSON_T_Interest}</option>)}
+
                         </select>
                     </div>
 
@@ -34,54 +73,96 @@ const AddFormModal = () => {
                         type="text"
                         className="p-2 rounded-lg"
                         placeholder="Enlace del formulario"
+                        {...register("linkForm", {
+                            required: {
+                                value: true,
+                            }
+                        })}
                     />
                     <input
                         type="text"
                         className="p-2 rounded-lg"
                         placeholder="Enlace de respuestas"
+                        {...register("linkFormResults", {
+                            required: {
+                                value: true,
+                            }
+                        })}
                     />
 
                     <div className="py-2">
                         <p className="dark:text-white text-white mb-2">Rango de edad</p>
+                        {errors.radio && <p className='py-2 text-yellow-400'>{errors.radio.message}</p>}
+
                         <div className="flex items-center gap-4">
                             <div className="flex items-center flex-wrap gap-2 ">
                                 <input
                                     type="radio"
-                                    name="age" value="1"
-                                    checked="true"
-                                    className="h-[20px] w-[20px] mx-auto" />
+                                    value="1"
+                                    className="h-[20px] w-[20px] mx-auto"
+                                    {...register("radio", {
+                                        required: {
+                                            value: true,
+                                            message: "Selecciona una opción de edad"
+                                        }
+                                    })}
+                                />
                                 <label className="text-white dark:text-white">Sin rango</label>
                             </div>
                             <div className="flex items-center flex-wrap gap-2">
                                 <input
                                     type="radio"
-                                    name="age" value="2"
-                                    className="h-[20px] w-[20px] mx-auto" />
+                                    value="2"
+                                    className="h-[20px] w-[20px] mx-auto"
+                                    {...register("radio", {
+                                        required: {
+                                            value: true,
+                                            message: "Selecciona una opción de edad"
+                                        }
+                                    })}
+                                />
                                 <label className="text-white dark:text-white">18 - 30</label>
                             </div>
                             <div className="flex items-center flex-wrap gap-2">
                                 <input
                                     type="radio"
-                                    name="age" value="3"
-                                    className="h-[20px] w-[20px] mx-auto" />
+                                    value="3"
+                                    className="h-[20px] w-[20px] mx-auto"
+                                    {...register("radio", {
+                                        required: {
+                                            value: true,
+                                            message: "Selecciona una opción de edad"
+                                        }
+                                    })} />
                                 <label className="text-white dark:text-white">31 - 40</label>
                             </div>
                             <div className="flex items-center flex-wrap gap-2">
                                 <input
                                     type="radio"
-                                    name="age" value="4"
-                                    className="h-[20px] w-[20px] mx-auto" />
+                                    value="4"
+                                    className="h-[20px] w-[20px] mx-auto"
+                                    {...register("radio", {
+                                        required: {
+                                            value: true,
+                                            message: "Selecciona una opción de edad"
+                                        }
+                                    })} />
                                 <label className="text-white dark:text-white">41 - 50</label>
                             </div>
                             <div className="flex items-center flex-wrap gap-2">
                                 <input
                                     type="radio"
-                                    name="age" value="5"
-                                    className="h-[20px] w-[20px] mx-auto" />
+                                    value="5"
+                                    className="h-[20px] w-[20px] mx-auto"
+                                    {...register("radio", {
+                                        required: {
+                                            value: true,
+                                            message: "Selecciona una opción de edad"
+                                        }
+                                    })} />
                                 <label className="text-white dark:text-white">51 +</label>
                             </div>
-
-
+                          
                         </div>
                     </div>
                     <div className="flex justify-end gap-2 py-2">
