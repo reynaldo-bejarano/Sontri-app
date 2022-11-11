@@ -3,18 +3,21 @@ import { useContext, useState } from "react";
 import { appContext } from "../../../context/AppProvider";
 import firebaseErrors from "../../../firebase/firebaseErrors";
 import { authContext } from "../../../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { handleRegisterModal } = useContext(appContext);
-    const {FirebaseCreateUser} = useContext(authContext);
+    const { FirebaseCreateUser } = useContext(authContext);
     const [error, setError] = useState();
+    const navigate = useNavigate()
 
     const onSubmit = async (data) => {
         try {
             await FirebaseCreateUser(data);
             handleRegisterModal();
+            navigate("/welcome");
         } catch (error) {
             setError(firebaseErrors(error.code));
         }

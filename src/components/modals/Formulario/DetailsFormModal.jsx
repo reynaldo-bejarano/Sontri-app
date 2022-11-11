@@ -3,6 +3,7 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import { appContext } from '../../../context/AppProvider';
 import { FiCopy } from 'react-icons/fi';
 import { authContext } from '../../../context/AuthProvider';
+import CopyButton from '../../buttons/CopyButton';
 
 
 const DetailsFormModal = () => {
@@ -29,7 +30,7 @@ const DetailsFormModal = () => {
 
     return (
         <div className="w-full lg:w-[700px] rounded-lg 2xl:w-[700px] md:mx-auto 
-    dark:bg-[#334155] bg-[#334155] absolute top-1/4 md:top-1/3 lg:md:top-1/2 md:left-1/2 md:transform 
+    dark:bg-[#334155] bg-[#334155] absolute top-1/4 md:top-1/3 lg:md:top-1/3 md:left-1/2 md:transform 
     md:-translate-x-1/2 md:-translate-y-1/2 border-2 dark:border-white border-white">
             <div className="p-5 md:px-10 2xl:p-10  shadow-lg rounded-lg">
                 <div className="flex justify-end mb-5">
@@ -51,10 +52,10 @@ const DetailsFormModal = () => {
                         </p>
                     </div>
                     <p className="p-2 rounded-lg bg-white dark:bg-white flex justify-between items-center"
-                    >{formDetailsData.TSON_T_FormLink}<button><FiCopy /></button>
+                    >{formDetailsData.TSON_T_FormLink} <CopyButton link={formDetailsData.TSON_T_FormLink} />
                     </p>
                     <p className="p-2 rounded-lg bg-white dark:bg-white flex justify-between items-center"
-                    >{formDetailsData.TSON_T_FormLinkResults}<button><FiCopy /></button>
+                    >{formDetailsData.TSON_T_FormLinkResults} <CopyButton link={formDetailsData.TSON_T_FormLinkResults} />
                     </p>
 
                     <div className="py-2">

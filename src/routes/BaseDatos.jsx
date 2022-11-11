@@ -7,6 +7,7 @@ import UpdateClientModal from '../components/modals/BaseDatos/UpdateClientModal'
 import DetailsClientModal from '../components/modals/BaseDatos/DetailsClientModal';
 import { useEffect } from 'react';
 import { authContext } from '../context/AuthProvider';
+import CopyButton from '../components/buttons/CopyButton';
 
 
 const BaseDatos = () => {
@@ -25,7 +26,7 @@ const BaseDatos = () => {
         } finally {
             setLoading(false);
         }
-    }, [])
+    }, [clientsData])
 
     if (loading === true) {
         return <div > </div>
@@ -67,7 +68,9 @@ const BaseDatos = () => {
                                                     <p className="dark:text-white text-white text-sm  font-bold">
                                                         {item.TSON_T_ClientEmail}
                                                     </p>
-                                                    <button> <FiCopy className='text-white dark:text-white' /></button>
+
+                                                    <CopyButton link={item.TSON_T_ClientEmail} color="text-white" />
+                                                    
                                                 </div>
                                                 <p className="dark:text-white text-white text-sm  font-bold">
                                                     {new Date(item.TSON_D_ClientRegisterDate.seconds * 1000).toISOString().slice(0, 19).replace('T', ' ')}
@@ -76,7 +79,7 @@ const BaseDatos = () => {
                                             <div className="grid gap-2  ">
                                                 <button
                                                     onClick={() => handleUpdateClientModalOpen(item.PK_TSON_T_ClientDocument)}
-                                                    className='dark:bg-[#F97316] bg-[#F97316]  rounded-lg py-1 px-10 text-sm dark:text-slate-800 text-slate-800 font-bold'
+                                                    className='dark:bg-white bg-white  rounded-lg py-1 px-10 text-sm dark:text-slate-800 text-slate-800 font-bold'
                                                 >
                                                     Actualizar
                                                 </button>

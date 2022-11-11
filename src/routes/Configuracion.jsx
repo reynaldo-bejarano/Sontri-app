@@ -21,7 +21,7 @@ const Configuracion = () => {
         } finally {
             setLoading(false)
         }
-    }, [])
+    }, [interestData])
 
     if (loading === true) {
         return <div > </div>
@@ -57,11 +57,11 @@ const Configuracion = () => {
                                             </div>
                                             <div>
 
-                                                <button
+                                                {/* <button
                                                     className='dark:bg-red-700 bg-red-700   rounded-lg py-1 px-10 text-sm dark:text-white text-white only:font-bold'
                                                 >
                                                     Eliminar
-                                                </button>
+                                                </button> */}
                                             </div>
                                         </div>
                                     )}

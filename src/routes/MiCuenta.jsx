@@ -8,23 +8,18 @@ import { authContext } from '../context/AuthProvider';
 const MiCuenta = () => {
     const { handleChangeEmailModalIsOpen, changeEmailModalOpenIsOpen, changePasswordModalIsOpen, handleChangePasswordModalIsOpen } = useContext(appContext);
     const { FirebaseGetUsers, userData } = useContext(authContext);
-    const [loading, setLoading] = useState(false);
+
 
 
     useEffect(() => {
         try {
-            setLoading(true);
             FirebaseGetUsers();
         } catch (error) {
             console.log(error);
-        } finally {
-            setLoading(false);
         }
-    }, [])
+    }, [userData])
 
-    if (loading === true) {
-        return <div > </div>
-    }
+  
 
     return (
         <>
@@ -36,7 +31,7 @@ const MiCuenta = () => {
                                 <div className='dark:bg-white bg-white px-2 p-5'>
                                     <p className='text-3xl px-5 uppercase font-bold dark:text-slate-800 text-slate-800'>Mi Cuenta</p>
                                 </div>
-                                <div className=' md:flex justify-between p-2 bg-gray-700 dark:bg-gray-700'>
+                                {userData && <div className=' md:flex justify-between p-2 bg-gray-700 dark:bg-gray-700'>
                                     <div className='px-5 w-full mb-5 md:mb-0'>
                                         <div className='mb-5 text-slate-800 dark:text-slate-800'>
                                             <p className='py-1 mb-1 h-8 dark:bg-white bg-white  dark:text-gray-600 text-gray-600 px-2 rounded-lg'>{userData.TSON_T_UserName}</p>
@@ -47,8 +42,8 @@ const MiCuenta = () => {
 
                                         <div className='grid gap-1'>
                                             <button
-                                              onClick={handleChangePasswordModalIsOpen}
-                                            className='dark:bg-[#F97316] bg-[#F97316] py-1 rounded-lg'>Actualizar contraseña</button>
+                                                onClick={handleChangePasswordModalIsOpen}
+                                                className='dark:bg-[#e9ff78] bg-[#e9ff78] py-1 rounded-lg'>Actualizar contraseña</button>
                                             <button
                                                 onClick={handleChangeEmailModalIsOpen}
                                                 className='dark:bg-red-800 bg-red-800 dark:text-white py-1 text-white rounded-lg'>Cambiar correo electrónico</button>
@@ -65,7 +60,8 @@ const MiCuenta = () => {
 
                                     </div>
 
-                                </div>
+                                </div>}
+
                             </div >
                         </div>
 
