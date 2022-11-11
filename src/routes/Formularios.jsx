@@ -42,7 +42,7 @@ const Formularios = () => {
                                         >
                                             Agregar
                                         </button>
-                                        <div >
+                                        {/* <div >
                                             <select name="cars" id="cars" className='w-full p-2 rounded-sm text-sm'>
                                                 <option value="0">Sin rango de edad</option>
                                                 <option value="18">18 - 30</option>
@@ -58,7 +58,7 @@ const Formularios = () => {
                                                 <option value="mercedes">Mercedes</option>
                                                 <option value="audi">Audi</option>
                                             </select>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className='mb-5'>
                                         <input type="email" placeholder='Buscar' className='p-2 rounded-sm text-sm w-full' />

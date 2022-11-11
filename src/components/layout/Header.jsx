@@ -7,7 +7,7 @@ import { authContext } from "../../context/AuthProvider"
 
 const Header = () => {
     const { userModalIsOpen, handleUserModalOpen } = useContext(appContext);
-    const { userAuthState, FirebaseSignOut } = useContext(authContext);
+    const { userAuthState, FirebaseSignOut, displayName } = useContext(authContext);
     const actualView = useLocation();
 
     const handleFirebaseSignOut = () => {
@@ -43,7 +43,7 @@ const Header = () => {
                                         onClick={handleUserModalOpen}
                                         className="drop-button text-white dark:text-white py-2 px-2 flex items-center gap-2"
                                     >
-                                        {userAuthState}
+                                        {displayName}
                                         <svg
                                             className="h-3 fill-current inline"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -57,8 +57,6 @@ const Header = () => {
                                         className={userModalIsOpen ? "dropdownlist absolute dark:bg-slate-700 dark:text-slate-800 bg-slate-700 text-slate-800 right-0 mt-3 p-3 overflow-auto z-30 w-[150px]" : "hidden"}
 
                                     >
-
-
                                         <NavLink
                                             to="/cuenta"
                                             onClick={handleUserModalOpen}

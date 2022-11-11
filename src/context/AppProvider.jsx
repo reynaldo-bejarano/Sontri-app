@@ -24,9 +24,12 @@ const AppProvider = ({ children }) => {
     const [UpdateClientModalOpenIsOpen, setUpdateClientModalOpenIsOpen] = useState(false);
     const [DetailsClientModalOpenIsOpen, setDetailsClientModalOpenIsOpen] = useState(false);
     const [clientDetailsId, setClientDetailsId] = useState();
+    const [clientUpdateId, setClientUpdateId] = useState();
+
     //Interes
     const [AddInteresModalOpenIsOpen, setAddInteresModalOpenIsOpen] = useState(false);
-
+    //Cuenta
+    const [changeEmailModalOpenIsOpen, setChangeEmailModalOpenIsOpen] = useState(false);
 
     ////User
     const handleUserModalOpen = () => {
@@ -42,7 +45,8 @@ const AppProvider = ({ children }) => {
         setDetailsClientModalOpenIsOpen(!DetailsClientModalOpenIsOpen);
     }
 
-    const handleUpdateClientModalOpen = () => {
+    const handleUpdateClientModalOpen = (id) => {
+        setClientUpdateId(id);
         setUpdateClientModalOpenIsOpen(!UpdateClientModalOpenIsOpen);
     }
 
@@ -73,10 +77,13 @@ const AppProvider = ({ children }) => {
 
     const handleChangePasswordModalIsOpen = () =>
         setChangePasswordModalIsOpen(!changePasswordModalIsOpen)
-
+    //Cuenta 
+    const handleChangeEmailModalIsOpen = () => {
+        setChangeEmailModalOpenIsOpen(!changeEmailModalOpenIsOpen)
+    }
 
     return (
-        <appContext.Provider value={{ handleRegisterModal, registerModalIsOpen, handleRecoverPasswordModal, handleChangePasswordModalIsOpen, recoverPasswordModalIsOpen, EmailForRecoverPassword, handleSetEmailForRecoverPassword, changePasswordModalIsOpen, AddFormModalIsOpen, handleAddFormModalOpen, DetailsFormModalIsOpen, formDetailsId, handleDetailsFormModalOpen, CopyLinkFormModalIsOpen, handleCopyLinkFormModal, AddClientModalOpenIsOpen, handleAddClientModalOpen, UpdateClientModalOpenIsOpen, handleUpdateClientModalOpen, DetailsClientModalOpenIsOpen, handleDetailsClientModalOpen, AddInteresModalOpenIsOpen, handleAddInteresModalOpen, userModalIsOpen, handleUserModalOpen, clientDetailsId }}>
+        <appContext.Provider value={{ handleRegisterModal, registerModalIsOpen, handleRecoverPasswordModal, handleChangePasswordModalIsOpen, recoverPasswordModalIsOpen, EmailForRecoverPassword, handleSetEmailForRecoverPassword, changePasswordModalIsOpen, AddFormModalIsOpen, handleAddFormModalOpen, DetailsFormModalIsOpen, formDetailsId, handleDetailsFormModalOpen, CopyLinkFormModalIsOpen, handleCopyLinkFormModal, AddClientModalOpenIsOpen, handleAddClientModalOpen, UpdateClientModalOpenIsOpen, handleUpdateClientModalOpen, DetailsClientModalOpenIsOpen, handleDetailsClientModalOpen, AddInteresModalOpenIsOpen, handleAddInteresModalOpen, userModalIsOpen, handleUserModalOpen, clientDetailsId, handleChangeEmailModalIsOpen, changeEmailModalOpenIsOpen, clientUpdateId }}>
             {children}
         </appContext.Provider>
     )

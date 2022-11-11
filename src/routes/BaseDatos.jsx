@@ -54,7 +54,6 @@ const BaseDatos = () => {
                                 </div>
 
                                 <div>
-
                                     {clientsData.map(item =>
                                         <div
                                             key={item.PK_TSON_T_ClientDocument}
@@ -73,12 +72,10 @@ const BaseDatos = () => {
                                                 <p className="dark:text-white text-white text-sm  font-bold">
                                                     {new Date(item.TSON_D_ClientRegisterDate.seconds * 1000).toISOString().slice(0, 19).replace('T', ' ')}
                                                 </p>
-                                               
-
                                             </div>
                                             <div className="grid gap-2  ">
                                                 <button
-                                                    onClick={handleUpdateClientModalOpen}
+                                                    onClick={() => handleUpdateClientModalOpen(item.PK_TSON_T_ClientDocument)}
                                                     className='dark:bg-[#F97316] bg-[#F97316]  rounded-lg py-1 px-10 text-sm dark:text-slate-800 text-slate-800 font-bold'
                                                 >
                                                     Actualizar
@@ -92,16 +89,7 @@ const BaseDatos = () => {
                                             </div>
                                         </div>
                                     )}
-                                
-
-
-
-
-
-
-
                                 </div>
-
                             </div>
                         </div>
                     </div>

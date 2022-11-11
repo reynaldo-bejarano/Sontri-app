@@ -1,7 +1,7 @@
-import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, updateEmail, reauthenticateWithCredential, EmailAuthProvider, updatePassword } from "firebase/auth";
 import { createContext, useEffect, useState } from 'react'
 import { auth, db } from "../firebase/firebase.config";
-import { doc, setDoc, collection, query, where, getDocs, getDoc } from "firebase/firestore";
+import { doc, setDoc, collection, query, where, getDocs, getDoc, updateDoc } from "firebase/firestore";
 import { nanoid } from "nanoid";
 
 export const authContext = createContext();
@@ -14,13 +14,14 @@ const AuthProvider = ({ children }) => {
     const [clientDetailsData, setClientDetailsData] = useState()
     const [formsData, setFormsData] = useState([])
     const [formDetailsData, setFormDetailsData] = useState()
-
+    const [userData, setUserData] = useState([]);
+    const [displayName, setDisplayName] = useState();
 
     useEffect(() => {
         onAuthStateChanged(auth, user => {
             if (user) {
+                setDisplayName(user.displayName)
                 setUserAuthState(user.uid);
-                console.log("usuarui = " + user.uid)
             } else {
                 setUserAuthState(user)
             }
@@ -61,7 +62,7 @@ const AuthProvider = ({ children }) => {
                         TSON_T_UserLastname: lastname,
                         TSON_T_UserCompany: company,
                         TSON_T_UserEmail: email,
-                        TSON_D_UserRegisterDate: company,
+                        TSON_D_UserRegisterDate: new Date(),
                         TSON_B_UserVerified: Credential.emailVerified,
                     };
                     await setDoc(doc(db, "TSON_CAT_User", id), docData);
@@ -166,8 +167,66 @@ const AuthProvider = ({ children }) => {
         }
     }
 
+    const FirebaseGetUsers = async () => {
+        const docRef = doc(db, "TSON_CAT_User", userAuthState);
+        const docSnap = await getDoc(docRef);
+        setUserData();
+        if (docSnap.exists()) {
+            setUserData(docSnap.data());
+        } else {
+            setUserData();
+        }
+    }
+
+    //Update 
+
+    const FirebaseUpdateEmail = async (newEmail, password) => {
+        var user = auth.currentUser;
+        var credentials = EmailAuthProvider.credential(
+            user.email,
+            password
+        );
+        await reauthenticateWithCredential(user, credentials).then(async () => {
+            await updateEmail(user, newEmail).then(async () => {
+                const washingtonRef = doc(db, "TSON_CAT_User", user.uid);
+                await updateDoc(washingtonRef, {
+                    TSON_T_UserEmail: newEmail
+                });
+            })
+        })
+    }
+
+    const FirebaseUpdatePassword = async (oldPassword, newPassword) => {
+
+        var user = auth.currentUser;
+        var credentials = EmailAuthProvider.credential(
+            user.email,
+            oldPassword
+        );
+        await reauthenticateWithCredential(user, credentials).then(async () => {
+            await updatePassword(user, newPassword)
+        })
+    }
+
+    const FirebaseUpdateClientDetails = async (data, idClient) => {
+
+        const washingtonRef = doc(db, "TSON_CAT_Client", idClient);
+
+        await updateDoc(washingtonRef, {
+            TSON_T_ClientName: data.name,
+            TSON_T_ClientLastname: data.lastname,
+            TSON_T_ClientPhone: data.phone,
+            TSON_T_ClientEmail: data.email,
+            FK_SON_CAT_ClientSON_InterestSON_First_InterestID: data.firstInterest,
+            FK_SON_CAT_ClientSON_InterestSON_Second_InterestID: data.secondInterest,
+        });
+    }
+
+
+
+
     return (
-        <authContext.Provider value={{ userAuthState, userKey, FirebaseSignInUserWithEmailAndPassword, FirebaseCreateUser, FirebaseSignOut, FirebaseCreateInterest, FirebaseGetInterests, FirebaseCreateClient, FirebaseGetClients, FirebaseCreateForm, FirebaseGetClientDetails, FirebaseGetForms, FirebaseGetFormDetails, interestData, clientsData, clientDetailsData, formsData, formDetailsData }}>
+        <authContext.Provider value={{ userAuthState, displayName, userKey, FirebaseSignInUserWithEmailAndPassword, FirebaseCreateUser, FirebaseSignOut, FirebaseCreateInterest, FirebaseGetInterests, FirebaseCreateClient, FirebaseGetClients, FirebaseCreateForm, FirebaseGetClientDetails, FirebaseGetForms, FirebaseGetFormDetails, FirebaseGetUsers, FirebaseUpdateEmail, FirebaseUpdatePassword, FirebaseUpdateClientDetails,interestData, clientsData, clientDetailsData, formsData, formDetailsData, userData }}>
             {children}
         </authContext.Provider>
     )
