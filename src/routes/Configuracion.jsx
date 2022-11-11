@@ -1,12 +1,33 @@
+
+import { useState } from 'react';
+import { useEffect } from 'react';
 import { useContext } from 'react';
 import Layout from '../components/layout/Layout'
 import AddInteres from '../components/modals/Interes/AddInteres';
 import { appContext } from '../context/AppProvider';
+import { authContext } from '../context/AuthProvider';
 
 const Configuracion = () => {
-    const { handleAddInteresModalOpen, AddInteresModalOpenIsOpen } = useContext(appContext);
+    const { handleAddInteresModalOpen, AddInteresModalOpenIsOpen, } = useContext(appContext);
+    const { FirebaseGetInterests, interestData } = useContext(authContext);
+    const [loading, setLoading] = useState(false);
 
-    
+    useEffect(() => {
+        try {
+            setLoading(true)
+            FirebaseGetInterests()
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
+        }
+    }, [])
+
+    if (loading === true) {
+        return <div > </div>
+    }
+
+
     return (
         <>
             <Layout>
@@ -29,50 +50,21 @@ const Configuracion = () => {
                                 </div>
 
                                 <div>
-                                    {/* ciclo map */}
-                                    <div className="dark:bg-[#334155] bg-[#334155] p-5 rounded-lg mb-4 gap-2 md:flex justify-between items-center ">
-                                        <div className='grid gap-1 mb-5 md:mb-0'>
-                                            <p className="dark:text-white text-white text-sm font-bold capitalize">Legos</p>
-                                        </div>
-                                        <div>
+                                    {interestData.map(item =>
+                                        <div key={item.PK_TSON_T_InterestDocument} className="dark:bg-[#334155] bg-[#334155] p-5 rounded-lg mb-4 gap-2 md:flex justify-between items-center ">
+                                            <div className='grid gap-1 mb-5 md:mb-0'>
+                                                <p className="dark:text-white text-white text-sm font-bold capitalize">{item.TSON_T_Interest}</p>
+                                            </div>
+                                            <div>
 
-                                            <button
-                                                className='dark:bg-red-700 bg-red-700   rounded-lg py-1 px-10 text-sm dark:text-white text-white only:font-bold'
-                                            >
-                                                Eliminar
-                                            </button>
+                                                <button
+                                                    className='dark:bg-red-700 bg-red-700   rounded-lg py-1 px-10 text-sm dark:text-white text-white only:font-bold'
+                                                >
+                                                    Eliminar
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                       {/* ciclo map */}
-                                       <div className="dark:bg-[#334155] bg-[#334155] p-5 rounded-lg mb-4 gap-2 md:flex justify-between items-center ">
-                                        <div className='grid gap-1 mb-5 md:mb-0'>
-                                            <p className="dark:text-white text-white text-sm font-bold capitalize">Legos</p>
-                                        </div>
-                                        <div>
-
-                                            <button
-                                                className='dark:bg-red-700 bg-red-700   rounded-lg py-1 px-10 text-sm dark:text-white text-white only:font-bold'
-                                            >
-                                                Eliminar
-                                            </button>
-                                        </div>
-                                    </div>
-                                       {/* ciclo map */}
-                                       <div className="dark:bg-[#334155] bg-[#334155] p-5 rounded-lg mb-4 gap-2 md:flex justify-between items-center ">
-                                        <div className='grid gap-1 mb-5 md:mb-0'>
-                                            <p className="dark:text-white text-white text-sm font-bold capitalize">Legos</p>
-                                        </div>
-                                        <div>
-
-                                            <button
-                                                className='dark:bg-red-700 bg-red-700   rounded-lg py-1 px-10 text-sm dark:text-white text-white only:font-bold'
-                                            >
-                                                Eliminar
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                 
+                                    )}
                                 </div>
 
                             </div>

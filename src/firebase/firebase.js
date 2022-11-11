@@ -1,20 +1,27 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "./firebase.config";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { auth, db } from "./firebase.config";
+import { doc, setDoc, collection, query, where, getDocs } from "firebase/firestore";
+import { nanoid } from "nanoid";
+
+
+
+//SingOut User
 
 
 // create
-const FirebaseCreateUser = () => { }
-const FirebaseCreateClient = () => { }
+
+
 const FirebaseCreateMessage = () => { }
 const FirebaseCreateForm = () => { }
-const FirebaseCreateInterest = () => { }
+
+
 
 // Get
 const FirebaseGetAccountCurrentUser = () => { }
 const FirebaseGetMessages = () => { }
-const FirebaseGetClients = () => { }
+
 const FirebaseGetForms = () => { }
-const FirebaseGetInterests = () => { }
+
 
 // Update
 const FirebaseUpdateEmail = () => { }
@@ -23,3 +30,5 @@ const FirebaseUpdateClient = () => { }
 const FirebaseUpdateMessage = () => { }
 const FirebaseUpdateForm = () => { }
 const FirebaseUpdateInterest = () => { }
+
+

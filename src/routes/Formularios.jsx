@@ -1,13 +1,31 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import Layout from "../components/layout/Layout"
 import AddFormModal from "../components/modals/Formulario/AddFormModal"
 import DetailsFormModal from "../components/modals/Formulario/DetailsFormModal"
 import { appContext } from "../context/AppProvider"
+import { authContext } from "../context/AuthProvider"
 
 
 const Formularios = () => {
 
     const { handleAddFormModalOpen, AddFormModalIsOpen, DetailsFormModalIsOpen, handleDetailsFormModalOpen } = useContext(appContext);
+    const { FirebaseGetForms, formsData } = useContext(authContext);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        try {
+            setLoading(true);
+            FirebaseGetForms();
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    }, [])
+
+    if (loading === true) {
+        return <div> </div>
+    }
 
     return (
         <>
@@ -24,7 +42,7 @@ const Formularios = () => {
                                         >
                                             Agregar
                                         </button>
-                                        <div >
+                                        {/* <div >
                                             <select name="cars" id="cars" className='w-full p-2 rounded-sm text-sm'>
                                                 <option value="0">Sin rango de edad</option>
                                                 <option value="18">18 - 30</option>
@@ -40,7 +58,7 @@ const Formularios = () => {
                                                 <option value="mercedes">Mercedes</option>
                                                 <option value="audi">Audi</option>
                                             </select>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className='mb-5'>
                                         <input type="email" placeholder='Buscar' className='p-2 rounded-sm text-sm w-full' />
@@ -48,22 +66,25 @@ const Formularios = () => {
                                 </div>
 
                                 <div>
-                                    {/* ciclo map */}
-                                    <div className="dark:bg-[#334155] bg-[#334155] p-5 rounded-lg mb-4">
-                                        <h2 className="dark:text-white text-white mb-3 font-bold">Formulario de navidad - Juguetes legos</h2>
+
+                                    {formsData.map(item => <div key={item.PK_TSON_T_FormDocument} className="dark:bg-[#334155] bg-[#334155] p-5 rounded-lg mb-4">
+                                        <h2 className="dark:text-white text-white mb-3 font-bold">{item.TSON_T_FormName}</h2>
                                         <div className="grid gap-2 md:flex md:gap-5 ">
-                                            <a href="#" target="_blanck" className='dark:bg-[#F97316] bg-[#F97316] text-center rounded-lg py-1 px-10 text-sm dark:text-white font-bold text-white'
+                                            <a href={item.TSON_T_FormLink} target="_blanck" className='dark:bg-[#F97316] bg-[#F97316] text-center rounded-lg py-1 px-10 text-sm dark:text-white font-bold text-white'
                                             >Formulario</a>
-                                            <a href="#" target="_blanck" className='dark:bg-[#EC4899] text-center bg-[#EC4899] rounded-lg py-1 px-10 text-sm dark:text-white font-bold text-white'
+                                            <a href={item.TSON_T_FormLinkResults} target="_blanck" className='dark:bg-[#EC4899] text-center bg-[#EC4899] rounded-lg py-1 px-10 text-sm dark:text-white font-bold text-white'
                                             >Resultados</a>
                                             <button
-                                                onClick={handleDetailsFormModalOpen}
+                                                onClick={() => handleDetailsFormModalOpen(item.PK_TSON_T_FormDocument)}
                                                 className='dark:bg-[#e9ff78] bg-[#e9ff78] rounded-lg py-1 px-10 text-sm dark:text-slate-800 text-slate-800 font-bold'
                                             >
                                                 Detalles
                                             </button>
                                         </div>
                                     </div>
+                                    )}
+
+
 
 
 

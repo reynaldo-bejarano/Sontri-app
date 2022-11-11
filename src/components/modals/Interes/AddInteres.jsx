@@ -1,9 +1,24 @@
+import { useEffect } from 'react';
 import { useContext } from 'react';
+import { useForm } from 'react-hook-form';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { appContext } from '../../../context/AppProvider';
+import { authContext } from '../../../context/AuthProvider';
 
 const AddInteres = () => {
     const { handleAddInteresModalOpen } = useContext(appContext);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { userAuthState, FirebaseCreateInterest } = useContext(authContext);
+
+    const onSubmit = (data) => {
+        try {
+            FirebaseCreateInterest(data);
+            handleAddInteresModalOpen();
+
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
 
     return (
         <div className="w-full lg:w-[500px] rounded-lg 2xl:w-[500px] md:mx-auto 
@@ -15,11 +30,16 @@ const AddInteres = () => {
                         <AiFillCloseCircle className="text-3xl 2xl:text-4xl text-white dark:text-white" />
                     </button>
                 </div>
-                <form className="grid gap-2">
+                <form className="grid gap-2" onSubmit={handleSubmit(onSubmit)}>
                     <input
                         type="text"
                         className="p-2 rounded-lg"
                         placeholder="Agregar el Interes"
+                        {...register("interes", {
+                            required: {
+                                value: true,
+                            }
+                        })}
                     />
                     <div className="flex justify-end  py-2">
                         <button
