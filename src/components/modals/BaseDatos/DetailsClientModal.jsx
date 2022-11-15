@@ -5,6 +5,7 @@ import { FiCopy } from 'react-icons/fi';
 import { useEffect } from 'react';
 import { authContext } from '../../../context/AuthProvider';
 import { useState } from 'react';
+import CopyButton from '../../buttons/CopyButton';
 
 
 const DetailsClientModal = () => {
@@ -39,22 +40,22 @@ const DetailsClientModal = () => {
                 </div>
 
                 <div className="grid gap-2">
-                   
+
                     {clientDetailsData && <>
                         <div className="grid md:grid-cols-6 gap-3">
                             <p className="col-span-2 p-2 rounded-lg bg-white dark:bg-white text-gray-600 dark:text-gray-600">
                                 {clientDetailsData.TSON_T_ClientName}
                             </p>
                             <p className="col-span-2 p-2 rounded-lg bg-white dark:bg-white text-gray-600 dark:text-gray-600">
-                            {clientDetailsData.TSON_T_ClientLastname}
+                                {clientDetailsData.TSON_T_ClientLastname}
                             </p>
                             <p className="col-span-2 p-2 rounded-lg bg-white dark:bg-white text-gray-600 dark:text-gray-600">
-                            {clientDetailsData.TSON_T_ClientPhone}
+                                {clientDetailsData.TSON_T_ClientPhone}
                             </p>
                         </div>
 
                         <p className=" p-2 rounded-lg text-gray-600 dark:text-gray-600 bg-white dark:bg-white flex justify-between items-center"
-                        > {clientDetailsData.TSON_T_ClientEmail} <button><FiCopy /></button>
+                        > {clientDetailsData.TSON_T_ClientEmail}  <CopyButton link={clientDetailsData.TSON_T_ClientEmail} />
                         </p>
 
 
@@ -63,10 +64,10 @@ const DetailsClientModal = () => {
                                 {clientDetailsData.TSON_T_ClientBirthday}
                             </p>
                             <p className="col-span-2 p-2 rounded-lg dark:bg-white bg-white text-gray-600 dark:text-gray-600">
-                            {clientDetailsData.FK_SON_CAT_ClientSON_InterestSON_First_InterestID}
+                                {clientDetailsData.FK_SON_CAT_ClientSON_InterestSON_First_InterestID}
                             </p>
                             <p className="col-span-2 p-2 rounded-lg dark:bg-white bg-white text-gray-600 dark:text-gray-600">
-                            {clientDetailsData.FK_SON_CAT_ClientSON_InterestSON_Second_InterestID}
+                                {clientDetailsData.FK_SON_CAT_ClientSON_InterestSON_Second_InterestID}
                             </p>
                         </div>
                     </>

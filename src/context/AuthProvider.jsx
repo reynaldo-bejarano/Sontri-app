@@ -8,7 +8,6 @@ export const authContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const [userAuthState, setUserAuthState] = useState(null)
-    const [userKey, setUserKey] = useState();
     const [interestData, setInterestData] = useState([])
     const [clientsData, setClientsData] = useState([])
     const [clientDetailsData, setClientDetailsData] = useState()
@@ -28,14 +27,13 @@ const AuthProvider = ({ children }) => {
         })
     }, [])
 
+  
     //Login UserWithEmailAndPassword
     const FirebaseSignInUserWithEmailAndPassword = async (email, password) => {
         await signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.info(user.uid)
-                setUserKey(user.uid)
-                console.info("Login user success!")
             })
     }
 
@@ -50,14 +48,11 @@ const AuthProvider = ({ children }) => {
         await createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const Credential = userCredential.user;
-                setUserKey(Credential.uid);
                 updateProfile(auth.currentUser, {
                     displayName: company
                 }).then(async () => {
-                    const id = nanoid();
                     const docData = {
-                        PK_TSON_T_UserDocument: id,
-                        TSON_T_InterestUID: Credential.uid,
+                        PK_TSON_T_UserID: Credential.uid,
                         TSON_T_UserName: name,
                         TSON_T_UserLastname: lastname,
                         TSON_T_UserCompany: company,
@@ -65,8 +60,7 @@ const AuthProvider = ({ children }) => {
                         TSON_D_UserRegisterDate: new Date(),
                         TSON_B_UserVerified: Credential.emailVerified,
                     };
-                    await setDoc(doc(db, "TSON_CAT_User", id), docData);
-                    console.log("added")
+                    await setDoc(doc(db, "TSON_CAT_User", Credential.uid), docData);
                 })
             });
     }
@@ -111,6 +105,39 @@ const AuthProvider = ({ children }) => {
             TSON_T_Interest: data.interes,
         };
         await setDoc(doc(db, "TSON_CAT_Interest", id), docData);
+    }
+
+    const FirebaseFirstLoginInterest = async (data) => {
+        const id = nanoid();
+        await setDoc(doc(db, "TSON_CAT_Interest", id), {
+            PK_TSON_T_InterestDocument: id,
+            TSON_T_InterestUID: userAuthState,
+            TSON_T_Interest: data.interes1,
+        }).then(async () => {
+            const id = nanoid();
+            await setDoc(doc(db, "TSON_CAT_Interest", id), {
+                PK_TSON_T_InterestDocument: id,
+                TSON_T_InterestUID: userAuthState,
+                TSON_T_Interest: data.interes2,
+            })
+        }).then(async () => {
+            const id = nanoid();
+            await setDoc(doc(db, "TSON_CAT_Interest", id), {
+                PK_TSON_T_InterestDocument: id,
+                TSON_T_InterestUID: userAuthState,
+                TSON_T_Interest: data.interes3,
+            })
+        })
+        // .then(async () => {
+        //     console.log(userAuthState)
+        //     const user = auth.currentUser
+        //     console.log(user.uid)
+        //     const washingtonRef = doc(db, "TSON_CAT_User", userAuthState);
+
+        //     await updateDoc(washingtonRef, {
+        //         TSON_B_UserVerified: true,
+        //     });
+        // })
     }
 
     //GET
@@ -226,7 +253,7 @@ const AuthProvider = ({ children }) => {
 
 
     return (
-        <authContext.Provider value={{ userAuthState, displayName, userKey, FirebaseSignInUserWithEmailAndPassword, FirebaseCreateUser, FirebaseSignOut, FirebaseCreateInterest, FirebaseGetInterests, FirebaseCreateClient, FirebaseGetClients, FirebaseCreateForm, FirebaseGetClientDetails, FirebaseGetForms, FirebaseGetFormDetails, FirebaseGetUsers, FirebaseUpdateEmail, FirebaseUpdatePassword, FirebaseUpdateClientDetails,interestData, clientsData, clientDetailsData, formsData, formDetailsData, userData }}>
+        <authContext.Provider value={{ userAuthState, displayName, FirebaseFirstLoginInterest, FirebaseSignInUserWithEmailAndPassword, FirebaseCreateUser, FirebaseSignOut, FirebaseCreateInterest, FirebaseGetInterests, FirebaseCreateClient, FirebaseGetClients, FirebaseCreateForm, FirebaseGetClientDetails, FirebaseGetForms, FirebaseGetFormDetails, FirebaseGetUsers, FirebaseUpdateEmail, FirebaseUpdatePassword, FirebaseUpdateClientDetails, interestData, clientsData, clientDetailsData, formsData, formDetailsData, userData }}>
             {children}
         </authContext.Provider>
     )

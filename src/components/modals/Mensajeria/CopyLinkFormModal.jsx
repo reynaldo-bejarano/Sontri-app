@@ -1,9 +1,9 @@
-import { FiCopy } from 'react-icons/fi';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { useContext } from 'react';
 import { appContext } from '../../../context/AppProvider';
 import { authContext } from '../../../context/AuthProvider';
 import { useEffect } from 'react';
+import CopyButton from '../../buttons/CopyButton';
 
 const CopyLinkFormModal = () => {
     const { handleCopyLinkFormModal } = useContext(appContext);
@@ -32,7 +32,7 @@ const CopyLinkFormModal = () => {
 
                         {formsData.map(item =>
                             <p key={item.PK_TSON_T_FormDocument} className="p-2 mb-2  rounded-lg h-10 bg-white dark:bg-white flex justify-between items-center"
-                            ><span> {item.TSON_T_FormName} -  <a className='text-blue-600' href={item.TSON_T_FormLink} target="_blank" rel="noopener noreferrer">{item.TSON_T_FormLink}</a></span><button><FiCopy /></button>
+                            ><span> {item.TSON_T_FormName} -  <a className='text-blue-600' href={item.TSON_T_FormLink} target="_blank" rel="noopener noreferrer">{item.TSON_T_FormLink}</a></span><CopyButton link={item.TSON_T_FormLink} />
                             </p>
                         )}
 
