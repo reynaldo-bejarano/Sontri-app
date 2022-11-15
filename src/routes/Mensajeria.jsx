@@ -13,8 +13,29 @@ const Mensajeria = () => {
     const { CopyLinkFormModalIsOpen, handleCopyLinkFormModal } = useContext(appContext);
     const { FirebaseGetClients, FirebaseGetInterests, clientsData, interestData } = useContext(authContext);
 
+
+
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const config = {
+            SecureToken: ' 2cc2e9a7-d87d-476f-b63e-9effbc2ef975',
+            To: 'gamakkero@gmail.com',
+            From: "gamakkero@gmail.com",
+            Subject: "This is the subject",
+            Body: "And this is the body"
+
+        }
+        console.log("g")
+        try {
+            await Email.send(config).then(() => {
+                alert("email send")
+            })
+        } catch (error) {
+            
+        }
+      
     }
 
     useEffect(() => {
@@ -58,7 +79,7 @@ const Mensajeria = () => {
                                                 <input type="checkbox" className='col-span-1 cursor-pointer' />
                                                 <p className='border-l dark:border-slate-700 border-slate-700 px-1 col-span-5 overflow-hidden'>{item.TSON_T_ClientEmail}</p>
                                                 <p className='border-l border-r dark:border-slate-700 border-slate-700 px-1 col-span-5 overflow-hidden'> {item.TSON_T_ClientName + " " + item.TSON_T_ClientLastname}</p>
-                                                <CopyButton link={item.TSON_T_ClientEmail}/>
+                                                <CopyButton link={item.TSON_T_ClientEmail} />
                                             </div>)}
                                         </div>
                                     </div>
