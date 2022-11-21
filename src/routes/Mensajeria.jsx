@@ -12,11 +12,7 @@ const Mensajeria = () => {
 
     const { CopyLinkFormModalIsOpen, handleCopyLinkFormModal } = useContext(appContext);
     const { FirebaseGetClients, FirebaseGetInterests, clientsData, interestData } = useContext(authContext);
-
-
-
-
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         const config = {
