@@ -2,12 +2,24 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { authContext } from '../../../context/AuthProvider';
 import { appContext } from "../../../context/AppProvider";
-
+import { toast } from 'react-toastify';
 
 const ChangeEmailForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { FirebaseUpdateEmail } = useContext(authContext);
     const { handleChangeEmailModalIsOpen } = useContext(appContext)
+
+
+    const notify = (message) => toast.info(message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+    });
 
     const onSubmit = async (data) => {
 
@@ -15,6 +27,7 @@ const ChangeEmailForm = () => {
         try {
             if (email.trim() === reemail.trim()) {
                 FirebaseUpdateEmail(email.trim(), password.trim())
+                notify("Correo electrónico actualizado");
                 handleChangeEmailModalIsOpen();
             }
         } catch (error) {

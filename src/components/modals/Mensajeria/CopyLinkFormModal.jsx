@@ -32,7 +32,7 @@ const CopyLinkFormModal = () => {
 
                         {formsData.map(item =>
                             <p key={item.PK_TSON_T_FormDocument} className="p-2 mb-2  rounded-lg h-10 bg-white dark:bg-white flex justify-between items-center"
-                            ><span> {item.TSON_T_FormName} -  <a className='text-blue-600' href={item.TSON_T_FormLink} target="_blank" rel="noopener noreferrer">{item.TSON_T_FormLink}</a></span><CopyButton link={item.TSON_T_FormLink} />
+                            ><span> {item.TSON_T_FormName} -  <a className='text-blue-600' href={item.TSON_T_FormLink} target="_blank" rel="noopener noreferrer">{item.TSON_T_FormLink}</a></span><CopyButton link={item.TSON_T_FormLink}  title="Enlace copiado" />
                             </p>
                         )}
 

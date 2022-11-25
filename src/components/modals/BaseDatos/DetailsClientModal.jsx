@@ -55,7 +55,7 @@ const DetailsClientModal = () => {
                         </div>
 
                         <p className=" p-2 rounded-lg text-gray-600 dark:text-gray-600 bg-white dark:bg-white flex justify-between items-center"
-                        > {clientDetailsData.TSON_T_ClientEmail}  <CopyButton link={clientDetailsData.TSON_T_ClientEmail} />
+                        > {clientDetailsData.TSON_T_ClientEmail}  <CopyButton link={clientDetailsData.TSON_T_ClientEmail} title="Correo electrónico copiado" />
                         </p>
 
 

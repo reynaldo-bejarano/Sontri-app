@@ -2,22 +2,35 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { authContext } from '../../../context/AuthProvider';
 import { appContext } from "../../../context/AppProvider";
+import { toast } from 'react-toastify';
 
 const ChangePasswordForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { FirebaseUpdatePassword } = useContext(authContext);
     const { handleChangePasswordModalIsOpen } = useContext(appContext)
 
+
+    const notify = (message) => toast.info(message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+    });
+
+
     const onSubmit = async (data) => {
 
         const { oldPassword, newPassword, newRepeatPassword } = data;
         try {
             if (newPassword.trim() === newRepeatPassword.trim()) {
-                FirebaseUpdatePassword(oldPassword.trim(), newPassword.trim())
+                FirebaseUpdatePassword(oldPassword.trim(), newPassword.trim());
+                notify("Contraseña actualizada");
                 handleChangePasswordModalIsOpen();
-                
             }
-
         } catch (error) {
             console.log(error.message)
         }

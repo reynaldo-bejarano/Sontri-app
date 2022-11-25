@@ -6,6 +6,8 @@ import Layout from '../components/layout/Layout'
 import AddInteres from '../components/modals/Interes/AddInteres';
 import { appContext } from '../context/AppProvider';
 import { authContext } from '../context/AuthProvider';
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Configuracion = () => {
     const { handleAddInteresModalOpen, AddInteresModalOpenIsOpen, } = useContext(appContext);
@@ -55,14 +57,7 @@ const Configuracion = () => {
                                             <div className='grid gap-1 mb-5 md:mb-0'>
                                                 <p className="dark:text-white text-white text-sm font-bold capitalize">{item.TSON_T_Interest}</p>
                                             </div>
-                                            <div>
-
-                                                {/* <button
-                                                    className='dark:bg-red-700 bg-red-700   rounded-lg py-1 px-10 text-sm dark:text-white text-white only:font-bold'
-                                                >
-                                                    Eliminar
-                                                </button> */}
-                                            </div>
+                                         
                                         </div>
                                     )}
                                 </div>
@@ -71,6 +66,7 @@ const Configuracion = () => {
                         </div>
                     </div>
                     {AddInteresModalOpenIsOpen && <AddInteres />}
+                    <ToastContainer />
 
                 </section>
             </Layout>

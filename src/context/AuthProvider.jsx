@@ -128,16 +128,17 @@ const AuthProvider = ({ children }) => {
                 TSON_T_Interest: data.interes3,
             })
         })
-        // .then(async () => {
-        //     console.log(userAuthState)
-        //     const user = auth.currentUser
-        //     console.log(user.uid)
-        //     const washingtonRef = doc(db, "TSON_CAT_User", userAuthState);
+    }
 
-        //     await updateDoc(washingtonRef, {
-        //         TSON_B_UserVerified: true,
-        //     });
-        // })
+    const FirebaseCreateMessage = async (data) => {
+        const id = nanoid();
+        const docData = {
+            PK_TSON_T_MessageDocument: id,
+            FK_SON_CAT_MessageSON_UserSON_UserID: userAuthState,
+            TSON_T_MessageToEmail: data,
+            TSON_T_MessageDate: new Date(),
+        };
+        await setDoc(doc(db, "TSON_CAT_Message", id), docData);
     }
 
     //GET
@@ -253,7 +254,7 @@ const AuthProvider = ({ children }) => {
 
 
     return (
-        <authContext.Provider value={{ userAuthState, displayName, FirebaseFirstLoginInterest, FirebaseSignInUserWithEmailAndPassword, FirebaseCreateUser, FirebaseSignOut, FirebaseCreateInterest, FirebaseGetInterests, FirebaseCreateClient, FirebaseGetClients, FirebaseCreateForm, FirebaseGetClientDetails, FirebaseGetForms, FirebaseGetFormDetails, FirebaseGetUsers, FirebaseUpdateEmail, FirebaseUpdatePassword, FirebaseUpdateClientDetails, interestData, clientsData, clientDetailsData, formsData, formDetailsData, userData }}>
+        <authContext.Provider value={{ userAuthState, displayName, FirebaseFirstLoginInterest, FirebaseSignInUserWithEmailAndPassword, FirebaseCreateUser, FirebaseSignOut, FirebaseCreateInterest, FirebaseGetInterests, FirebaseCreateClient, FirebaseGetClients, FirebaseCreateForm, FirebaseGetClientDetails, FirebaseGetForms, FirebaseGetFormDetails, FirebaseGetUsers, FirebaseUpdateEmail, FirebaseUpdatePassword, FirebaseUpdateClientDetails, FirebaseCreateMessage, interestData, clientsData, clientDetailsData, formsData, formDetailsData, userData }}>
             {children}
         </authContext.Provider>
     )

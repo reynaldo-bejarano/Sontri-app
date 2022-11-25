@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { appContext } from '../../../context/AppProvider';
 import { authContext } from '../../../context/AuthProvider';
+import { toast } from 'react-toastify';
 
 const UpdateClientModal = () => {
     const { handleUpdateClientModalOpen, clientUpdateId } = useContext(appContext);
@@ -16,7 +17,6 @@ const UpdateClientModal = () => {
             if (clientDetailsData) {
                 setValuesForm();
             }
-
         } catch (error) {
             console.log(error.message)
         }
@@ -27,9 +27,19 @@ const UpdateClientModal = () => {
             FirebaseGetInterests();
         } catch (error) {
             console.log(error.message)
-
         }
     })
+
+    const notify = (message) => toast.success(message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+    });;
 
     const setValuesForm = () => {
         setValue("name", clientDetailsData.TSON_T_ClientName);
@@ -39,19 +49,17 @@ const UpdateClientModal = () => {
         setValue("date", clientDetailsData.TSON_T_ClientBirthday);
         setValue("firstInterest", clientDetailsData.FK_SON_CAT_ClientSON_InterestSON_First_InterestID)
         setValue("secondInterest", clientDetailsData.FK_SON_CAT_ClientSON_InterestSON_Second_InterestID)
-
     }
 
     const onSubmit = (data) => {
         try {
-            FirebaseUpdateClientDetails(data, clientUpdateId)
+            FirebaseUpdateClientDetails(data, clientUpdateId);
+            notify("Cliente actualizado");
             handleUpdateClientModalOpen();
         } catch (error) {
             console.log(error.message)
         }
     }
-
-
 
 
     return (

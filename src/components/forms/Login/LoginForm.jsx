@@ -39,7 +39,6 @@ const LoginForm = () => {
                             message: "Ingresa un formato de correo valido"
                         },
                     })}
-
                 />
                 {error && <p className="text-xs px-2 text-red-500">{error}</p>}
                 {errors.email && <p className="text-xs px-2 text-red-500">*{errors.email.message}</p>}

@@ -1,15 +1,15 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import Layout from '../components/layout/Layout'
 import ChangeEmailModal from '../components/modals/Cuenta/ChangeEmailModal';
 import ChangePasswordModal from '../components/modals/Cuenta/ChangePasswordModal';
 import { appContext } from '../context/AppProvider';
 import { authContext } from '../context/AuthProvider';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MiCuenta = () => {
     const { handleChangeEmailModalIsOpen, changeEmailModalOpenIsOpen, changePasswordModalIsOpen, handleChangePasswordModalIsOpen } = useContext(appContext);
     const { FirebaseGetUsers, userData } = useContext(authContext);
-
-
 
     useEffect(() => {
         try {
@@ -19,7 +19,7 @@ const MiCuenta = () => {
         }
     }, [userData])
 
-  
+
 
     return (
         <>
@@ -68,7 +68,7 @@ const MiCuenta = () => {
                     </div>
                     {changeEmailModalOpenIsOpen && <ChangeEmailModal />}
                     {changePasswordModalIsOpen && <ChangePasswordModal />}
-
+                    <ToastContainer />
                 </section>
             </Layout>
         </>
