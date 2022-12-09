@@ -54,10 +54,7 @@ const LoginForm = () => {
                             value: true,
                             message: "El contraseña es requerida"
                         },
-                        minLength: {
-                            value: 8,
-                            message: "Contraseña mínimo de ocho carácteres"
-                        },
+                       
                     })}
                 />
                 {error && <p className="text-xs px-2 text-red-500">{error}</p>}

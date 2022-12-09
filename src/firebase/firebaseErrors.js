@@ -10,7 +10,7 @@ const firebaseErrors = (errorCode) => {
         return "La correo electrónico es incorrecto"
     }
     if (errorCode === "auth/wrong-password") {
-        return "La contraseña es incorrecta"
+        return "Datos invalidos"
     }
 
     

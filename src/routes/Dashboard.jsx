@@ -5,12 +5,24 @@ import { FaWpforms } from 'react-icons/fa';
 import { BiTimeFive } from 'react-icons/bi';
 
 import { AiOutlineArrowUp } from 'react-icons/ai';
+import { useEffect } from "react";
+import { useContext } from "react";
+import { authContext } from "../context/AuthProvider";
 
 
 
 
 
 const Dashboard = () => {
+
+  const { FirebaseGetClients, FirebaseGetForms, FirebaseGetMessages, FirebaseGetInterests, clientsData, formsData, messageData,interestData } = useContext(authContext);
+
+  useEffect(() => {
+    FirebaseGetClients();
+    FirebaseGetForms();
+    FirebaseGetMessages();
+    FirebaseGetInterests();
+  }, []);
 
   return (
     <>
@@ -23,8 +35,8 @@ const Dashboard = () => {
                 <div className="dark:bg-white bg-white px-5 py-2 rounded-md">
                   <div className="flex items-center justify-between mb-5">
                     <div>
-                      <h1 className="text-xs dark:text-gray-500 text-gray-500 font-bold">Nuevos clientes</h1>
-                      <h1 className="font-bold text-2xl dark:text-slate-800 text-slate-800">521.458</h1>
+                      <h1 className="text-xs dark:text-gray-500 text-gray-500 font-bold">Clientes registrados</h1>
+                      <h1 className="font-bold text-2xl dark:text-slate-800 text-slate-800">{clientsData ? clientsData.length : 0}</h1>
                     </div>
                     <div className="p-2 dark:bg-[#ef4444] bg-[#ef4444] rounded-full">
                       <FiUsers className="dark:text-white text-white text-2xl" />
@@ -32,7 +44,7 @@ const Dashboard = () => {
                   </div>
                   <div className="flex items-center gap-2">
                     <AiOutlineArrowUp className="dark:text-green-400 text-green-400 text-lg font-bold" />
-                    <p className="dark:text-green-400 text-green-400 font-bold">3.14%</p>
+                    <p className="dark:text-green-400 text-green-400 font-bold">0%</p>
                     <p className="text-xs dark:text-gray-500 text-gray-500 font-bold">Último mes</p>
                   </div>
                 </div>
@@ -42,7 +54,7 @@ const Dashboard = () => {
                   <div className="flex items-center justify-between mb-5">
                     <div>
                       <h1 className="text-xs dark:text-gray-500 text-gray-500 font-bold">Mensajes enviados</h1>
-                      <h1 className="font-bold text-2xl text-slate-800 dark:text-slate-800">80.000</h1>
+                      <h1 className="font-bold text-2xl text-slate-800 dark:text-slate-800">{messageData ? messageData.length : 0}</h1>
                     </div>
                     <div className="p-2 dark:bg-[#f97316] bg-[#f97316] rounded-full">
                       <AiOutlineMessage className="dark:text-white text-white text-2xl" />
@@ -50,7 +62,7 @@ const Dashboard = () => {
                   </div>
                   <div className="flex items-center gap-2">
                     <AiOutlineArrowUp className="dark:text-green-400 text-green-400 text-lg font-bold" />
-                    <p className="dark:text-green-400 text-green-400 font-bold">15.14%</p>
+                    <p className="dark:text-green-400 text-green-400 font-bold">0%</p>
                     <p className="text-xs dark:text-gray-500 text-gray-500 font-bold">Último mes</p>
                   </div>
                 </div>
@@ -60,7 +72,7 @@ const Dashboard = () => {
                   <div className="flex items-center justify-between mb-5">
                     <div>
                       <h1 className="text-xs dark:text-gray-500 text-gray-500 font-bold">Formularios</h1>
-                      <h1 className="font-bold text-2xl dark:text-slate-800 text-slate-800">356</h1>
+                      <h1 className="font-bold text-2xl dark:text-slate-800 text-slate-800">{formsData ? formsData.length : 0}</h1>
                     </div>
                     <div className="p-2 dark:bg-[#ec4899] bg-[#ec4899] rounded-full">
                       <FaWpforms className="dark:text-white text-white text-2xl" />
@@ -68,7 +80,7 @@ const Dashboard = () => {
                   </div>
                   <div className="flex items-center gap-2">
                     <AiOutlineArrowUp className="dark:text-green-400 text-green-400 text-lg font-bold" />
-                    <p className="dark:text-green-400 text-green-400 font-bold">10.14%</p>
+                    <p className="dark:text-green-400 text-green-400 font-bold">0%</p>
                     <p className="text-xs dark:text-gray-500 text-gray-500 font-bold">Último mes</p>
                   </div>
                 </div>
@@ -77,8 +89,8 @@ const Dashboard = () => {
                 <div className="dark:bg-white bg-white px-5 py-2 rounded-md">
                   <div className="flex items-center justify-between mb-5">
                     <div>
-                      <h1 className="text-xs dark:text-gray-500 text-gray-500 font-bold">Tiempo de uso</h1>
-                      <h1 className="font-bold text-2xl dark:text-slate-800 text-slate-800">2h 30min</h1>
+                      <h1 className="text-xs dark:text-gray-500 text-gray-500 font-bold">Intereses agregados</h1>
+                      <h1 className="font-bold text-2xl dark:text-slate-800 text-slate-800">{interestData ? interestData.length : 0}</h1>
                     </div>
                     <div className="p-2 dark:bg-[#0ea5e9] bg-[#0ea5e9] rounded-full">
                       <BiTimeFive className="dark:text-white text-white text-2xl" />
@@ -86,7 +98,7 @@ const Dashboard = () => {
                   </div>
                   <div className="flex items-center gap-2">
                     <AiOutlineArrowUp className="dark:text-green-400 text-green-400 text-lg font-bold" />
-                    <p className="dark:text-green-400 text-green-400 font-bold">31.14%</p>
+                    <p className="dark:text-green-400 text-green-400 font-bold">0%</p>
                     <p className="text-xs dark:text-gray-500 text-gray-500 font-bold">Último mes</p>
                   </div>
                 </div>

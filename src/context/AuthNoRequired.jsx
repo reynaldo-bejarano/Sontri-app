@@ -4,7 +4,7 @@ import { authContext } from './AuthProvider';
 
 const AuthNoRequired = ({ children }) => {
     const { userAuthState } = useContext(authContext);
-    
+    console.log(userAuthState);
     if (userAuthState !== null) {
         return <Navigate to="/" />
     }

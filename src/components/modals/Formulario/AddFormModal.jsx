@@ -193,7 +193,7 @@ const AddFormModal = () => {
                                 type='submit'
                                 className='dark:bg-green-700 bg-green-700 rounded-lg py-2 px-10 text-sm text-white dark:text-white font-bold'
                             >
-                                Enviar
+                                Agregar
                             </button>
                         </div>
 

@@ -12,8 +12,9 @@ const Mensajeria = () => {
 
     const { CopyLinkFormModalIsOpen, handleCopyLinkFormModal } = useContext(appContext);
     const { FirebaseCreateMessage } = useContext(authContext);
-    const { FirebaseGetClients, clientsData, } = useContext(authContext);
+    const { FirebaseGetClients, clientsData } = useContext(authContext);
     const form = useRef();
+
     const notify = (message) => toast.success(message, {
         position: "top-right",
         autoClose: 2000,
@@ -23,7 +24,19 @@ const Mensajeria = () => {
         draggable: true,
         progress: undefined,
         theme: "colored",
+    });
+
+    const notifyError = (message) => toast.error(message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
     });;
+
 
     useEffect(() => {
         try {
@@ -41,7 +54,9 @@ const Mensajeria = () => {
                 await FirebaseCreateMessage(form.current.email.value)
                 notify("Mensaje enviado");
             }, (error) => {
-
+                if (error.text === "The recipient address is empty") {
+                    notifyError("La dirrección de email está vacia");
+                }
             });
     };
 
@@ -57,14 +72,17 @@ const Mensajeria = () => {
                                         <input type="email" placeholder='Buscar' className='p-2 rounded-sm text-sm w-full' />
                                     </div>
                                     <div className='dark:bg-white bg-white h-72 w-full overflow-auto '>
-                                        <div>
-                                            {clientsData.map(item => <div key={item.PK_TSON_T_ClientDocument} className='grid grid-cols-12 gap-2 w-full  text-sm border-b dark:border-slate-700 border-slate-700  p-2 '>
+
+                                        {clientsData && clientsData.map(item =>
+                                            <div key={item.PK_TSON_T_ClientDocument} className='grid grid-cols-12 gap-2 w-full  text-sm border-b dark:border-slate-700 border-slate-700  p-2 '>
                                                 <input type="checkbox" className='col-span-1 cursor-pointer' />
                                                 <p className='border-l dark:border-slate-700 border-slate-700 px-1 col-span-5 overflow-hidden'>{item.TSON_T_ClientEmail}</p>
                                                 <p className='border-l border-r dark:border-slate-700 border-slate-700 px-1 col-span-5 overflow-hidden'> {item.TSON_T_ClientName + " " + item.TSON_T_ClientLastname}</p>
-                                                <CopyButton link={item.TSON_T_ClientEmail}  title="Correo electrónico copiado" />
-                                            </div>)}
-                                        </div>
+                                                <CopyButton link={item.TSON_T_ClientEmail} title="Correo electrónico copiado" />
+                                            </div>
+                                            
+                                        )}
+
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +96,7 @@ const Mensajeria = () => {
                                     <div className='mb-2'>
                                         <input type="email"
                                             name='email'
-                                            placeholder='Ingresa el correo electronico'
+                                            placeholder='Ingresa el correo electrónico'
                                             className='p-2 rounded-sm text-sm w-full'
                                         />
                                     </div>
