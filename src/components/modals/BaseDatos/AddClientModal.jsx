@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { appContext } from '../../../context/AppProvider';
 import { authContext } from '../../../context/AuthProvider';
+import { toast } from 'react-toastify';
 
 const AddClientModal = () => {
 
@@ -20,9 +21,21 @@ const AddClientModal = () => {
 
     }, [])
 
+    const notify = (message) => toast.success(message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+    });;
+
     const onSubmit = (data) => {
         try {
             FirebaseCreateClient(data)
+            notify("Cliente agregado");
             handleAddClientModalOpen();
         } catch (error) {
             console.log(error.message)

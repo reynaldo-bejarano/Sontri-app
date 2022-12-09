@@ -4,6 +4,8 @@ import AddFormModal from "../components/modals/Formulario/AddFormModal"
 import DetailsFormModal from "../components/modals/Formulario/DetailsFormModal"
 import { appContext } from "../context/AppProvider"
 import { authContext } from "../context/AuthProvider"
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Formularios = () => {
@@ -23,9 +25,7 @@ const Formularios = () => {
         }
     }, [formsData])
 
-    if (loading === true) {
-        return <div> </div>
-    }
+   
 
     return (
         <>
@@ -91,7 +91,7 @@ const Formularios = () => {
                     {AddFormModalIsOpen && <AddFormModal />}
                     {DetailsFormModalIsOpen && <DetailsFormModal />}
 
-
+                    <ToastContainer />
                 </section>
             </Layout>
         </>

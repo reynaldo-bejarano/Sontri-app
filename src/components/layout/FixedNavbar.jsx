@@ -28,7 +28,7 @@ const FixedNavbar = () => {
                                     : "block pb-1 py-1 md:py-3 pl-1 align-middle text-white md:text-slate-800 lg:text-slate-800 no-underline hover:text-[#2BB4BE] border-b-2 lg:border-none font-bold  w-full ml-3 active text-xs md:text-sm"
                                 }
                             >
-                                MENSAJERIA
+                                MENSAJES
                             </NavLink>
                         </li>
                         <li className="mr-3 flex-1">
@@ -50,7 +50,7 @@ const FixedNavbar = () => {
                                     : "block pb-1 py-1 md:py-3 pl-1 align-middle text-white md:text-white lg:text-slate-800 no-underline hover:text-[#2BB4BE] border-b-2 lg:border-none font-bold  w-full ml-3 active text-xs md:text-sm"
                                 }
                             >
-                                DATABASE
+                                BASE DATOS
                             </NavLink>
                         </li>
                         {/* <li className="mr-3 flex-1">

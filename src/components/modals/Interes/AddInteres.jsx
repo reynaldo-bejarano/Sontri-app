@@ -1,24 +1,37 @@
-import { useEffect } from 'react';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { appContext } from '../../../context/AppProvider';
 import { authContext } from '../../../context/AuthProvider';
+import { toast } from 'react-toastify';
 
 const AddInteres = () => {
     const { handleAddInteresModalOpen } = useContext(appContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { userAuthState, FirebaseCreateInterest } = useContext(authContext);
 
+    const notify = (message) => toast.success(message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+    });
+
     const onSubmit = (data) => {
         try {
             FirebaseCreateInterest(data);
+            notify("Interes agregado");
             handleAddInteresModalOpen();
-
         } catch (error) {
             console.log(error.message)
         }
     }
+
+ 
 
     return (
         <div className="w-full lg:w-[500px] rounded-lg 2xl:w-[500px] md:mx-auto 

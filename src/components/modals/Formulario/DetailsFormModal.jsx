@@ -52,10 +52,10 @@ const DetailsFormModal = () => {
                         </p>
                     </div>
                     <p className="p-2 rounded-lg bg-white dark:bg-white flex justify-between items-center"
-                    >{formDetailsData.TSON_T_FormLink} <CopyButton link={formDetailsData.TSON_T_FormLink} />
+                    >{formDetailsData.TSON_T_FormLink} <CopyButton link={formDetailsData.TSON_T_FormLink} title="Enlace copiado" />
                     </p>
                     <p className="p-2 rounded-lg bg-white dark:bg-white flex justify-between items-center"
-                    >{formDetailsData.TSON_T_FormLinkResults} <CopyButton link={formDetailsData.TSON_T_FormLinkResults} />
+                    >{formDetailsData.TSON_T_FormLinkResults} <CopyButton link={formDetailsData.TSON_T_FormLinkResults}  title="Enlace copiado" />
                     </p>
 
                     <div className="py-2">

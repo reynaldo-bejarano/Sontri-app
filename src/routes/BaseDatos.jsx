@@ -1,5 +1,4 @@
 import Layout from '../components/layout/Layout'
-import { FiCopy } from 'react-icons/fi';
 import AddClientModal from '../components/modals/BaseDatos/AddClientModal';
 import { useContext, useState } from 'react';
 import { appContext } from '../context/AppProvider';
@@ -8,6 +7,8 @@ import DetailsClientModal from '../components/modals/BaseDatos/DetailsClientModa
 import { useEffect } from 'react';
 import { authContext } from '../context/AuthProvider';
 import CopyButton from '../components/buttons/CopyButton';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const BaseDatos = () => {
@@ -28,9 +29,8 @@ const BaseDatos = () => {
         }
     }, [clientsData])
 
-    if (loading === true) {
-        return <div > </div>
-    }
+
+
 
     return (
         <>
@@ -69,7 +69,7 @@ const BaseDatos = () => {
                                                         {item.TSON_T_ClientEmail}
                                                     </p>
 
-                                                    <CopyButton link={item.TSON_T_ClientEmail} color="text-white" />
+                                                    <CopyButton link={item.TSON_T_ClientEmail} title="Correo electrónico copiado" color="text-white" />
                                                     
                                                 </div>
                                                 <p className="dark:text-white text-white text-sm  font-bold">
@@ -102,6 +102,7 @@ const BaseDatos = () => {
                     {DetailsClientModalOpenIsOpen && <DetailsClientModal />}
 
 
+                    <ToastContainer />
 
                 </section>
             </Layout>

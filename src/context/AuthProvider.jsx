@@ -7,12 +7,13 @@ import { nanoid } from "nanoid";
 export const authContext = createContext();
 
 const AuthProvider = ({ children }) => {
-    const [userAuthState, setUserAuthState] = useState(null)
-    const [interestData, setInterestData] = useState([])
-    const [clientsData, setClientsData] = useState([])
-    const [clientDetailsData, setClientDetailsData] = useState()
-    const [formsData, setFormsData] = useState([])
-    const [formDetailsData, setFormDetailsData] = useState()
+    const [userAuthState, setUserAuthState] = useState(null);
+    const [interestData, setInterestData] = useState([]);
+    const [clientsData, setClientsData] = useState([]);
+    const [clientDetailsData, setClientDetailsData] = useState([]);
+    const [formsData, setFormsData] = useState([]);
+    const [messageData, setMessageData] = useState([]);
+    const [formDetailsData, setFormDetailsData] = useState([]);
     const [userData, setUserData] = useState([]);
     const [displayName, setDisplayName] = useState();
 
@@ -27,7 +28,7 @@ const AuthProvider = ({ children }) => {
         })
     }, [])
 
-  
+
     //Login UserWithEmailAndPassword
     const FirebaseSignInUserWithEmailAndPassword = async (email, password) => {
         await signInWithEmailAndPassword(auth, email, password)
@@ -38,7 +39,20 @@ const AuthProvider = ({ children }) => {
     }
 
     //salir
-    const FirebaseSignOut = async () => await signOut(auth)
+    const FirebaseSignOut = async () => {
+        try {
+            await signOut(auth);
+            setInterestData([]);
+            setClientsData([]);
+            setClientDetailsData([]);
+            setFormsData([]);
+            setFormDetailsData([]);
+            setUserData([]);
+            setDisplayName([]);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 
 
     // create
@@ -128,16 +142,17 @@ const AuthProvider = ({ children }) => {
                 TSON_T_Interest: data.interes3,
             })
         })
-        // .then(async () => {
-        //     console.log(userAuthState)
-        //     const user = auth.currentUser
-        //     console.log(user.uid)
-        //     const washingtonRef = doc(db, "TSON_CAT_User", userAuthState);
+    }
 
-        //     await updateDoc(washingtonRef, {
-        //         TSON_B_UserVerified: true,
-        //     });
-        // })
+    const FirebaseCreateMessage = async (data) => {
+        const id = nanoid();
+        const docData = {
+            PK_TSON_T_MessageDocument: id,
+            FK_SON_CAT_MessageSON_UserSON_UserID: userAuthState,
+            TSON_T_MessageToEmail: data,
+            TSON_T_MessageDate: new Date(),
+        };
+        await setDoc(doc(db, "TSON_CAT_Message", id), docData);
     }
 
     //GET
@@ -161,6 +176,8 @@ const AuthProvider = ({ children }) => {
             setClientsData(old => [...old, doc.data()]);
         });
     }
+
+
 
     const FirebaseGetClientDetails = async (id) => {
         const docRef = doc(db, "TSON_CAT_Client", id);
@@ -203,6 +220,15 @@ const AuthProvider = ({ children }) => {
         } else {
             setUserData();
         }
+    }
+
+    const FirebaseGetMessages = async () => {
+        const q = query(collection(db, "TSON_CAT_Message"), where("FK_SON_CAT_MessageSON_UserSON_UserID", "==", userAuthState));
+        const querySnapshot = await getDocs(q);
+        setMessageData([]);
+        querySnapshot.forEach((doc) => {
+            setMessageData(old => [...old, doc.data()]);
+        });
     }
 
     //Update 
@@ -253,7 +279,7 @@ const AuthProvider = ({ children }) => {
 
 
     return (
-        <authContext.Provider value={{ userAuthState, displayName, FirebaseFirstLoginInterest, FirebaseSignInUserWithEmailAndPassword, FirebaseCreateUser, FirebaseSignOut, FirebaseCreateInterest, FirebaseGetInterests, FirebaseCreateClient, FirebaseGetClients, FirebaseCreateForm, FirebaseGetClientDetails, FirebaseGetForms, FirebaseGetFormDetails, FirebaseGetUsers, FirebaseUpdateEmail, FirebaseUpdatePassword, FirebaseUpdateClientDetails, interestData, clientsData, clientDetailsData, formsData, formDetailsData, userData }}>
+        <authContext.Provider value={{ userAuthState, displayName, FirebaseFirstLoginInterest, FirebaseSignInUserWithEmailAndPassword, FirebaseCreateUser, FirebaseSignOut, FirebaseCreateInterest, FirebaseGetInterests, FirebaseCreateClient, FirebaseGetClients, FirebaseCreateForm, FirebaseGetClientDetails, FirebaseGetForms, FirebaseGetFormDetails, FirebaseGetUsers, FirebaseUpdateEmail, FirebaseUpdatePassword, FirebaseUpdateClientDetails, FirebaseCreateMessage, FirebaseGetMessages, interestData, clientsData, clientDetailsData, formsData, formDetailsData, userData,messageData }}>
             {children}
         </authContext.Provider>
     )

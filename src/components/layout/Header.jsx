@@ -7,12 +7,13 @@ import { authContext } from "../../context/AuthProvider"
 
 const Header = () => {
     const { userModalIsOpen, handleUserModalOpen } = useContext(appContext);
-    const { userAuthState, FirebaseSignOut, displayName } = useContext(authContext);
+    const { FirebaseSignOut, displayName } = useContext(authContext);
     const actualView = useLocation();
 
     const handleFirebaseSignOut = () => {
         try {
             FirebaseSignOut();
+            handleUserModalOpen();
         } catch (error) {
             console.error(error);
         }
@@ -32,7 +33,13 @@ const Header = () => {
                     </div>
                     <div className="hidden md:flex flex-1 md:w-full justify-left md:justify-start  px-2 lg:col-span-2">
                         <h1 className="text-white dark:text-white font-bold uppercase pl-5">
-                            {actualView.pathname === "/" ? "inicio" : actualView.pathname.slice(1)}
+                            {actualView.pathname === "/" && "inicio" }
+                            {actualView.pathname === "/mensajeria" && "Mensajería" }
+                            {actualView.pathname === "/basedatos" && "Base de datos" }
+                            {actualView.pathname === "/formularios" && "Formularios" }
+                            {actualView.pathname === "/cuenta" && "Cuenta" }
+                            {actualView.pathname === "/configuracion" && "Configuración" }
+
                         </h1>
                     </div>
                     <div className="flex content-center justify-between md:w-1/3 lg:w-full md:justify-end lg:col-span-8">
