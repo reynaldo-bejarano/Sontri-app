@@ -47,8 +47,11 @@ const UpdateClientModal = () => {
         setValue("phone", clientDetailsData.TSON_T_ClientPhone);
         setValue("email", clientDetailsData.TSON_T_ClientEmail);
         setValue("date", clientDetailsData.TSON_T_ClientBirthday);
+
         setValue("firstInterest", clientDetailsData.FK_SON_CAT_ClientSON_InterestSON_First_InterestID)
         setValue("secondInterest", clientDetailsData.FK_SON_CAT_ClientSON_InterestSON_Second_InterestID)
+        const words = clientDetailsData.TSON_T_ClientBirthday.split("");
+        console.log(words[5]+words[6])
     }
 
     const onSubmit = (data) => {
