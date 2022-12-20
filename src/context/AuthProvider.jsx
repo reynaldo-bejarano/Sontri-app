@@ -201,12 +201,11 @@ const AuthProvider = ({ children }) => {
         });
     }
 
-    const [interestDataChart, setInterestDataChart] = useState(["", ""]);
+    const [interestDataChart, setInterestDataChart] = useState(["", "", ""]);
 
     const FirebaseGetInterestsChart = async () => {
         const q = query(collection(db, "TSON_CAT_Interest"), where("TSON_T_InterestUID", "==", userAuthState));
         const querySnapshot = await getDocs(q);
-
         setInterestDataChart([]);
         querySnapshot.forEach((doc) => {
             setInterestDataChart(old => [...old, doc.data().TSON_T_Interest]);

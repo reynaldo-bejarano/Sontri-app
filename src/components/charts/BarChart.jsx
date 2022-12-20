@@ -48,7 +48,7 @@ const BarChart = () => {
 
     const { FirebaseGetInterestsChart, interestDataChart } = useContext(authContext);
     const labels = interestDataChart;
-    const scores = [1, 1, 1, 1,1, 1, 1, 1];
+    const scores = [1, 2, 3, 4,5, 1, 1, 1];
     useEffect(() => {
         try {
             FirebaseGetInterestsChart();

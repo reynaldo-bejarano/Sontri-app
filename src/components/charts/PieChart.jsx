@@ -7,8 +7,7 @@ ChartJS.register(
     CategoryScale, DoughnutController, LinearScale, PointElement, ArcElement, Title, Tooltip, Legend, Filler
 );
 
-const scores = [10, 15, 25, 36, 12, 36, 45, 84, 91, 12, 91, 12]
-const labels = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
 const options = {
     aspectRatio: 1,
     layout: {
@@ -35,6 +34,8 @@ const options = {
 
 const PieChart = () => {
     const { FirebaseGetMessagesSize, messagesSize } = useContext(authContext);
+    const scores = messagesSize;
+    const labels = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
     useEffect(() => {
         try {
@@ -49,7 +50,7 @@ const PieChart = () => {
         return {
             datasets: [{
                 label: "Clientes agregados por mes",
-                data: messagesSize,
+                data: scores,
                 borderColor: "white",
                 backgroundColor: [
                     '#2a9d8f',
@@ -64,9 +65,7 @@ const PieChart = () => {
                     '#f4a261',
                     '#e76f51',
                     '#f08080',
-
                 ]
-
             }],
             labels
         }
