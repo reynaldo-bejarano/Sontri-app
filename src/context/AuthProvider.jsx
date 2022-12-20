@@ -17,6 +17,38 @@ const AuthProvider = ({ children }) => {
     const [userData, setUserData] = useState([]);
     const [displayName, setDisplayName] = useState();
 
+
+    const [enero, setEnero] = useState(0)
+    const [febrero, setFebrero] = useState(0)
+    const [marzo, setMarzo] = useState(0)
+    const [abril, setAbril] = useState(0)
+    const [mayo, setMayo] = useState(0)
+    const [junio, setJunio] = useState(0)
+    const [julio, setJulio] = useState(0)
+    const [agosto, setAgosto] = useState(0)
+    const [septiembre, setSeptiembre] = useState(0)
+    const [octubre, setOctubre] = useState(0)
+    const [noviembre, setNoviembre] = useState(0)
+    const [diciembre, setDiciembre] = useState(0)
+
+    const [fechas, setFechas] = useState([enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre]);
+
+
+    const [eneroMessage, setEneroMessage] = useState(0)
+    const [febreroMessage, setFebreroMessage] = useState(0)
+    const [marzoMessage, setMarzoMessage] = useState(0)
+    const [abrilMessage, setAbrilMessage] = useState(0)
+    const [mayoMessage, setMayoMessage] = useState(0)
+    const [junioMessage, setJunioMessage] = useState(0)
+    const [julioMessage, setJulioMessage] = useState(0)
+    const [agostoMessage, setAgostoMessage] = useState(0)
+    const [septiembreMessage, setSeptiembreMessage] = useState(0)
+    const [octubreMessage, setOctubreMessage] = useState(0)
+    const [noviembreMessage, setNoviembreMessage] = useState(0)
+    const [diciembreMessage, setDiciembreMessage] = useState(0)
+
+    const [messagesSize, setMessagesSize] = useState([eneroMessage, febreroMessage, marzoMessage, abrilMessage, mayoMessage, junioMessage, julioMessage, agostoMessage, septiembreMessage, octubreMessage, noviembreMessage, diciembreMessage]);
+
     useEffect(() => {
         onAuthStateChanged(auth, user => {
             if (user) {
@@ -162,9 +194,22 @@ const AuthProvider = ({ children }) => {
     const FirebaseGetInterests = async () => {
         const q = query(collection(db, "TSON_CAT_Interest"), where("TSON_T_InterestUID", "==", userAuthState));
         const querySnapshot = await getDocs(q);
+
         setInterestData([]);
         querySnapshot.forEach((doc) => {
             setInterestData(old => [...old, doc.data()]);
+        });
+    }
+
+    const [interestDataChart, setInterestDataChart] = useState(["", ""]);
+
+    const FirebaseGetInterestsChart = async () => {
+        const q = query(collection(db, "TSON_CAT_Interest"), where("TSON_T_InterestUID", "==", userAuthState));
+        const querySnapshot = await getDocs(q);
+
+        setInterestDataChart([]);
+        querySnapshot.forEach((doc) => {
+            setInterestDataChart(old => [...old, doc.data().TSON_T_Interest]);
         });
     }
 
@@ -174,10 +219,9 @@ const AuthProvider = ({ children }) => {
         setClientsData([]);
         querySnapshot.forEach((doc) => {
             setClientsData(old => [...old, doc.data()]);
+
         });
     }
-
-
 
     const FirebaseGetClientDetails = async (id) => {
         const docRef = doc(db, "TSON_CAT_Client", id);
@@ -276,10 +320,159 @@ const AuthProvider = ({ children }) => {
     }
 
 
+    const FirebaseGetMessagesSize = async () => {
+        const q = query(collection(db, "TSON_CAT_Message"), where("FK_SON_CAT_MessageSON_UserSON_UserID", "==", userAuthState));
+        const querySnapshot = await getDocs(q);
+        let numEnero = 0;
+        let numFebrero = 0;
+        let numMarzo = 0;
+        let numAbril = 0;
+        let numMayo = 0;
+        let numJunio = 0;
+        let numJulio = 0;
+        let numAgosto = 0;
+        let numSeptiembre = 0;
+        let numOctubre = 0;
+        let numNoviembre = 0;
+        let numDiciciembre = 0;
+        querySnapshot.forEach((doc) => {
+            const fecha = new Date(doc.data().TSON_T_MessageDate.seconds * 1000).toISOString().slice(0, 19).replace('T', ' ')
+            const words = fecha.split("");
+            const palabra = words[5] + words[6]
+
+            if (palabra === "01") {
+                numEnero += 1;
+            }
+            if (palabra === "02") {
+                numFebrero += 1;
+            }
+            if (palabra === "03") {
+                numMarzo += 1;
+            }
+            if (palabra === "04") {
+                numAbril += 1;
+            }
+            if (palabra === "05") {
+                numMayo += 1;
+            }
+            if (palabra === "06") {
+                numJunio += 1;
+            }
+            if (palabra === "07") {
+                numJulio += 1;
+            }
+            if (palabra === "08") {
+                numAgosto += 1;
+            }
+            if (palabra === "09") {
+                numSeptiembre += 1;
+            }
+            if (palabra === "10") {
+                numOctubre += 1;
+            }
+            if (palabra === "11") {
+                numNoviembre += 1;
+            }
+            if (palabra === "12") {
+                numDiciciembre += 1;
+            }
+        });
+
+        setEneroMessage(numEnero);
+        setFebreroMessage(numFebrero);
+        setMarzoMessage(numMarzo);
+        setAbrilMessage(numAbril);
+        setMayoMessage(numMayo);
+        setJunioMessage(numJunio);
+        setJulioMessage(numJulio);
+        setAgostoMessage(numAgosto);
+        setSeptiembreMessage(numSeptiembre);
+        setOctubreMessage(numOctubre);
+        setNoviembreMessage(numNoviembre);
+        setDiciembreMessage(numDiciciembre);
+        setMessagesSize([eneroMessage, febreroMessage, marzoMessage, abrilMessage, mayoMessage, junioMessage, julioMessage, agostoMessage, septiembreMessage, octubreMessage, noviembreMessage, diciembreMessage])
+
+    }
+
+    const FirebaseGetClientsFecha = async () => {
+        const q = query(collection(db, "TSON_CAT_Client"), where("FK_SON_CAT_ClientSON_UserSON_UserID", "==", userAuthState));
+        const querySnapshot = await getDocs(q);
+        let numEnero = 0;
+        let numFebrero = 0;
+        let numMarzo = 0;
+        let numAbril = 0;
+        let numMayo = 0;
+        let numJunio = 0;
+        let numJulio = 0;
+        let numAgosto = 0;
+        let numSeptiembre = 0;
+        let numOctubre = 0;
+        let numNoviembre = 0;
+        let numDiciciembre = 0;
+        querySnapshot.forEach((doc) => {
+            const fecha = new Date(doc.data().TSON_D_ClientRegisterDate.seconds * 1000).toISOString().slice(0, 19).replace('T', ' ')
+            const words = fecha.split("");
+            const palabra = words[5] + words[6]
+
+            if (palabra === "01") {
+                numEnero += 1;
+            }
+            if (palabra === "02") {
+                numFebrero += 1;
+            }
+            if (palabra === "03") {
+                numMarzo += 1;
+            }
+            if (palabra === "04") {
+                numAbril += 1;
+            }
+            if (palabra === "05") {
+                numMayo += 1;
+            }
+            if (palabra === "06") {
+                numJunio += 1;
+            }
+            if (palabra === "07") {
+                numJulio += 1;
+            }
+            if (palabra === "08") {
+                numAgosto += 1;
+            }
+            if (palabra === "09") {
+                numSeptiembre += 1;
+            }
+
+            if (palabra === "10") {
+                numOctubre += 1;
+            }
+            if (palabra === "11") {
+                numNoviembre += 1;
+            }
+            if (palabra === "12") {
+                numDiciciembre += 1;
+            }
+        });
+        setEnero(numEnero);
+        setFebrero(numFebrero);
+        setMarzo(numMarzo);
+        setAbril(numAbril);
+        setMayo(numMayo);
+        setJunio(numJunio);
+        setJulio(numJulio);
+        setAgosto(numAgosto);
+        setSeptiembre(numSeptiembre);
+        setOctubre(numOctubre);
+        setNoviembre(numNoviembre);
+        setDiciembre(numDiciciembre);
+        console.log(numEnero)
+        setFechas([enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre])
+    }
+
+
 
 
     return (
-        <authContext.Provider value={{ userAuthState, displayName, FirebaseFirstLoginInterest, FirebaseSignInUserWithEmailAndPassword, FirebaseCreateUser, FirebaseSignOut, FirebaseCreateInterest, FirebaseGetInterests, FirebaseCreateClient, FirebaseGetClients, FirebaseCreateForm, FirebaseGetClientDetails, FirebaseGetForms, FirebaseGetFormDetails, FirebaseGetUsers, FirebaseUpdateEmail, FirebaseUpdatePassword, FirebaseUpdateClientDetails, FirebaseCreateMessage, FirebaseGetMessages, interestData, clientsData, clientDetailsData, formsData, formDetailsData, userData,messageData }}>
+        <authContext.Provider value={{ userAuthState, displayName, FirebaseFirstLoginInterest, FirebaseSignInUserWithEmailAndPassword, FirebaseCreateUser, FirebaseSignOut, FirebaseCreateInterest, FirebaseGetInterests, FirebaseCreateClient, FirebaseGetClients, FirebaseCreateForm, FirebaseGetClientDetails, FirebaseGetForms, FirebaseGetFormDetails, FirebaseGetUsers, FirebaseUpdateEmail, FirebaseUpdatePassword, FirebaseUpdateClientDetails, FirebaseCreateMessage, FirebaseGetMessages, interestData, clientsData, clientDetailsData, formsData, formDetailsData, userData, messageData, FirebaseGetClientsFecha, fechas, FirebaseGetMessagesSize, messagesSize, FirebaseGetInterestsChart, interestDataChart }}>
             {children}
         </authContext.Provider>
     )

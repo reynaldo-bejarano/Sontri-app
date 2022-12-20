@@ -8,25 +8,37 @@ import { AiOutlineArrowUp } from 'react-icons/ai';
 import { useEffect } from "react";
 import { useContext } from "react";
 import { authContext } from "../context/AuthProvider";
-
-
+import LineChart from "../components/charts/LineChart";
+import BarChart from "../components/charts/BarChart";
+import PieChart from "../components/charts/PieChart";
+import PolarChart from "../components/charts/PolarChart";
 
 
 
 const Dashboard = () => {
 
-  const { FirebaseGetClients, FirebaseGetForms, FirebaseGetMessages, FirebaseGetInterests, clientsData, formsData, messageData,interestData } = useContext(authContext);
+  const { FirebaseGetClients, FirebaseGetForms, FirebaseGetMessages, FirebaseGetInterests, clientsData, formsData, messageData, interestData } = useContext(authContext);
+
 
   useEffect(() => {
-    FirebaseGetClients();
-    FirebaseGetForms();
-    FirebaseGetMessages();
-    FirebaseGetInterests();
+    try {
+      FirebaseGetClients();
+      FirebaseGetForms();
+      FirebaseGetMessages();
+      FirebaseGetInterests();
+    } catch (error) {
+      console.log(error.message)
+    }
+
   }, []);
+
+
+
 
   return (
     <>
       <Layout>
+
         <section className="dark:bg-[#F0F2F5] bg-[#F0F2F5] w-full relative">
           <div className="dark:bg-slate-800 bg-slate-800 w-full md:h-96 lg:h-64 py-14">
             <div className="w-full">
@@ -109,16 +121,28 @@ const Dashboard = () => {
 
           <div className="w-full ">
             <div className="grid md:grid-cols-2 gap-10 w-full p-5 relative -top-14">
-              <div className="dark:bg-[#334155] bg-[#334155] w-full h-80 rounded-lg"></div>
-              <div className="dark:bg-[#334155] bg-[#334155] w-full h-80 rounded-lg"></div>
+              <div className="dark:bg-[#334155] bg-[#334155] w-full h-80 rounded-lg">
+                <p className="text-center text-white p-5">Clientes registrados por mes</p>
+                <LineChart />
+              </div>
+              <div className="dark:bg-[#334155] bg-[#334155] w-full h-80 rounded-lg">
+                <p className="text-center text-white p-5">Cantidad de formularios enviados por interés</p>
+                <BarChart />
+              </div>
             </div>
           </div>
 
           <div className="w-full pb-20">
             <div className="grid md:grid-cols-2 gap-10 w-full p-5 relative -top-14">
 
-              <div className="dark:bg-[#334155] bg-[#334155] w-full h-80 rounded-lg"></div>
-              <div className="dark:bg-[#334155] bg-[#334155] w-full h-80 rounded-lg"></div>
+              <div className="dark:bg-[#334155] bg-[#334155] w-full h-96 rounded-lg grid justify-center items-center">
+                <p className="text-center text-white p-5">Mensajes enviados por mes</p>
+                <PieChart />
+              </div>
+              <div className="dark:bg-[#334155] bg-[#334155] w-full h-96 rounded-lg grid justify-center">
+                <p className="text-center text-white p-5">Tiempo de uso por mes</p>
+                <PolarChart />
+              </div>
             </div>
           </div>
 
