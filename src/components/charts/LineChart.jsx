@@ -46,7 +46,7 @@ const LineChart = () => {
 
     const { FirebaseGetClientsFecha, fechas } = useContext(authContext);
     const labels = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    const scores = [10, 15, 25, 36, 12, 36, 45, 84, 91, 12, 91, 12]
+    const scores = fechas;
 
 
     useEffect(() => {
@@ -63,7 +63,7 @@ const LineChart = () => {
         return {
             datasets: [{
                 label: "Clientes agregados por mes",
-                data: fechas,
+                data: scores,
                 tension: 0.3,
                 borderColor: "white",
                 pointRadius: 6,
@@ -87,7 +87,7 @@ const LineChart = () => {
     }, []);
 
 
-    return (fechas ? <Line data={data} options={options} /> : <p></p>)
+    return  <Line data={data} options={options} /> 
 };
 
 

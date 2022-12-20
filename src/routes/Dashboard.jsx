@@ -140,8 +140,8 @@ const Dashboard = () => {
                 <PieChart />
               </div>
               <div className="dark:bg-[#334155] bg-[#334155] w-full h-96 rounded-lg grid justify-center">
-                <p className="text-center text-white p-5">Tiempo de uso por mes</p>
-                <PolarChart />
+                {/* <p className="text-center text-white p-5">Tiempo de uso por mes</p> */}
+                {/* <PolarChart /> */}
               </div>
             </div>
           </div>
